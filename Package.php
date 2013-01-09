@@ -10,4 +10,10 @@ use df\core;
 class Package extends core\Package {
     
     const PRIORITY = 20;
+
+    public static $dependencies = [
+        'webCore',
+        'media',
+        'nightfireCore'
+    ];
 }
