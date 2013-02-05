@@ -36,23 +36,23 @@ echo $this->html->collectionList($this['labelList'])
         $hasChildren = $label['hasChildren'];
 
         if($isNew) {
-            return $this->html->link(
-                    $this->uri->query(['slug' => $label['slug']]),
-                    $label['name']
-                )
-                ->setIcon('folder')
-                ->setDisposition('transitive');
+            return $this->html->element('samp',
+                $this->html->link(
+                        $this->uri->query(['slug' => $label['slug']]),
+                        $label['name']
+                    )
+                    ->setIcon('folder')
+                    ->setDisposition('transitive')
+            );
         }
 
-        $output = $this->html->element('samp', 
-            $this->html->link(
-                    '~admin/navigation/labels/details?label='.$label['id'],
-                    $label['name']
-                )
-                ->setIcon('label')
-                ->setDisposition('informative')
-                ->setTitle($label['slug'])
-        );
+        $output = $this->html->link(
+                '~admin/navigation/labels/details?label='.$label['id'],
+                $label['name']
+            )
+            ->setIcon('label')
+            ->setDisposition('informative')
+            ->setTitle($label['slug']);
 
         if($hasChildren) {
             $output = [
