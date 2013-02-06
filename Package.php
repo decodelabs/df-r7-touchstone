@@ -15,6 +15,6 @@ class Package extends core\Package {
         'webCore',
         'media',
         'nightfireCore',
-        'interactCore'
+        'interact'
     ];
 }
