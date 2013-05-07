@@ -18,9 +18,7 @@ class HttpController extends arch\Controller {
 
         $view['postList'] = $model->post->fetch()
 
-            ->paginate()
-                ->setOrderableFields('slug', 'primaryLabel', 'creationDate', 'lastEditDate', 'archiveDate')
-                ->applyWith($this->request->query);
+            ->paginateWith($this->request->query);
 
         return $view;
     }

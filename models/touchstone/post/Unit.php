@@ -9,6 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\axis;
+use df\opal;
     
 class Unit extends axis\unit\table\Base {
 
@@ -44,5 +45,10 @@ class Unit extends axis\unit\table\Base {
 
         // Is live
         $schema->addIndexedField('isLive', 'Boolean');
+    }
+
+    public function applyPagination(opal\query\IPaginator $paginator) {
+        $paginator->setOrderableFields('slug', 'primaryLabel', 'creationDate', 'lastEditDate', 'archiveDate');
+        return $this;
     }
 }
