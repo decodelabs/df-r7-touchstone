@@ -43,6 +43,7 @@ class HttpAdd extends arch\form\Action {
     protected function _setDefaultValues() {
         $this->values->isLive = true;
         $this->values->displayIntro = true;
+        $this->values->allowComments = true;
     }
 
     protected function _createUi() {
@@ -78,6 +79,13 @@ class HttpAdd extends arch\form\Action {
         $fs->addFieldArea()->push(
             $this->html->checkbox('isPersonal', $this->values->isPersonal, $this->_(
                 'This post should only be displayed in the owner\'s own personal list'
+            ))
+        );
+
+        // Allow comments
+        $fs->addFieldArea()->push(
+            $this->html->checkbox('allowComments', $this->values->allowComments, $this->_(
+                'Allow comments on this post'
             ))
         );
 
@@ -133,13 +141,17 @@ class HttpAdd extends arch\form\Action {
             ->addField('isPersonal', 'boolean')
                 ->end()
 
+            // Allow comments
+            ->addField('allowComments', 'boolean')
+                ->end()
+
             // Display intro
             ->addField('displayIntro', 'boolean')
                 ->end()
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'isLive', 'isPersonal'
+                'slug', 'archiveDate', 'isLive', 'isPersonal', 'allowComments'
             ])
             ->applyTo($this->_version, [
                 'title', 'displayIntro'
@@ -153,7 +165,7 @@ class HttpAdd extends arch\form\Action {
 
 
         if($this->isValid()) {
-            if(!$this->_keepVersion || $this->_version->hasChanged()) {
+            if($this->_version->hasChanged()) {
                 if(!$this->_keepVersion) {
                     $this->_version->makeNew();
                     $this->_version->creationDate = null;

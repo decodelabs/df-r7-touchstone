@@ -31,12 +31,19 @@ class DetailHeaderBar extends arch\component\template\HeaderBar {
 
     protected function _addSectionLinks($menu) {
         $versionCount = $this->_record->versions->select()->count();
+        $commentCount = $this->data->interact->countCommentsFor($this->_record);
 
         $menu->addLinks(
             // Details
             $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Details'), true)
                 ->setAction('details')
                 ->setIcon('details'),
+
+            // Comments
+            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Comments'), true)
+                ->setAction('comments')
+                ->setIcon('comment')
+                ->setNote($this->format->counterNote($commentCount)),
 
             // Versions
             $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Versions'), true)

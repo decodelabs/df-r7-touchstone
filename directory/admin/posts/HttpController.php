@@ -32,6 +32,13 @@ class HttpController extends arch\Controller {
         return $view;
     }
 
+    public function commentsHtmlAction() {
+        $view = $this->aura->getView('Comments.html');
+        $this->_fetchPost($view);
+
+        return $view;
+    }
+
     public function versionsHtmlAction() {
         $view = $this->aura->getView('Versions.html');
         $this->_fetchPost($view);

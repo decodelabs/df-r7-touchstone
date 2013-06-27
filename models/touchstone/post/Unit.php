@@ -47,6 +47,10 @@ class Unit extends axis\unit\table\Base {
         // Active version
         $schema->addField('activeVersion', 'One', 'touchstone/postVersion');
 
+        // Comments
+        $schema->addField('allowComments', 'Boolean')
+            ->setDefaultValue(true);
+
         // Is live
         $schema->addIndexedField('isLive', 'Boolean');
     }
