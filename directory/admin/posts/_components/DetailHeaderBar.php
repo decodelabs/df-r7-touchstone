@@ -31,7 +31,7 @@ class DetailHeaderBar extends arch\component\template\HeaderBar {
 
     protected function _addSectionLinks($menu) {
         $versionCount = $this->_record->versions->select()->count();
-        $commentCount = $this->data->interact->countCommentsFor($this->_record);
+        $commentCount = $this->data->interact->comment->countFor($this->_record);
 
         $menu->addLinks(
             // Details
