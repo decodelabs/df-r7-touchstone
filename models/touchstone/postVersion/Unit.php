@@ -9,6 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\axis;
+use df\opal;
     
 class Unit extends axis\unit\table\Base {
 
@@ -23,16 +24,19 @@ class Unit extends axis\unit\table\Base {
         $schema->addIndexedField('creationDate', 'Timestamp');
 
         // Last edited
-        $schema->addField('lastEditDate', 'Timestamp');
-
-        // Archive date
-        $schema->addField('archiveDate', 'Date');
+        $schema->addField('lastEditDate', 'Timestamp')
+            ->shouldTimestampAsDefault(false)
+            ->isNullable(true);
 
         // Owner
         $schema->addField('owner', 'One', 'user/client');
 
         // Title
         $schema->addField('title', 'String', 128);
+
+        // Image
+        $schema->addField('headerImage', 'OneMediaFile', 'image')
+            ->isNullable(true);
 
         // Intro
         $schema->addField('intro', 'ContentBlock', 'Description');
@@ -43,5 +47,12 @@ class Unit extends axis\unit\table\Base {
 
         // Body
         $schema->addField('body', 'ContentSlot', 'Article');
+    }
+
+    public function applyPagination(opal\query\IPaginator $paginator) {
+        $paginator->setOrderableFields('title', 'owner', 'post', 'creationDate', 'lastEditDate', 'displayIntro')
+            ->setDefaultOrder('creationDate DESC');
+            
+        return $this;
     }
 }

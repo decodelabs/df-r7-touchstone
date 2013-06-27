@@ -21,7 +21,7 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('slug', 'Slug');
 
         // Labels
-        $schema->addField('label', 'Many', 'nightfire/label');
+        $schema->addField('labels', 'Many', 'nightfire/label');
 
         // Created
         $schema->addIndexedField('creationDate', 'Timestamp');
@@ -32,13 +32,17 @@ class Unit extends axis\unit\table\Base {
             ->isNullable(true);
 
         // Archive date
-        $schema->addField('archiveDate', 'Date');
+        $schema->addField('archiveDate', 'Date')
+            ->isNullable(true);
 
         // Owner
         $schema->addField('owner', 'One', 'user/client');
 
+        // Is personal
+        $schema->addField('isPersonal', 'Boolean');
+
         // Versions
-        $schema->addField('verions', 'OneToMany', 'touchstone/postVersion', 'post');
+        $schema->addField('versions', 'OneToMany', 'touchstone/postVersion', 'post');
 
         // Active version
         $schema->addField('activeVersion', 'One', 'touchstone/postVersion');
@@ -48,7 +52,9 @@ class Unit extends axis\unit\table\Base {
     }
 
     public function applyPagination(opal\query\IPaginator $paginator) {
-        $paginator->setOrderableFields('slug', 'primaryLabel', 'creationDate', 'lastEditDate', 'archiveDate');
+        $paginator->setOrderableFields('slug', 'owner', 'isPersonal', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive')
+            ->setDefaultOrder('creationDate DESC');
+            
         return $this;
     }
 }
