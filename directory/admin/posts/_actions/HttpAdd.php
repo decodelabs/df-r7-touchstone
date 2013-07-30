@@ -190,7 +190,7 @@ class HttpAdd extends arch\form\Action {
             $this->_post->save();
             $this->_version->save();
             
-            $this->comms->notify(
+            $this->comms->flash(
                 'post.save',
                 $this->_('The post has been successfully saved'),
                 'success'

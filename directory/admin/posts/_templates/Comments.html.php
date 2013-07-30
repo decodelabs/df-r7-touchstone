@@ -3,7 +3,7 @@
 echo $this->import->component('DetailHeaderBar', '~admin/posts/', $this['post']);
 
 if(!$this['post']['allowComments']) {
-    echo $this->html->notification($this->_(
+    echo $this->html->flashMessage($this->_(
         'Comments are currently disabled for this post'
     ), 'warning');
 }
