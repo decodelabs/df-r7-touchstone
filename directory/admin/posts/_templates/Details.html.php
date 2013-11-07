@@ -14,7 +14,7 @@ echo $this->html->attributeList($this['post'])
 
     // Owner
     ->addField('owner', function($post) {
-        return $this->import->component('UserLink', '~admin/users/', $post['owner']);
+        return $this->import->component('UserLink', '~admin/users/clients/', $post['owner']);
     })
 
     // Is personal

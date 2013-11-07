@@ -19,7 +19,7 @@ echo $this->html->collectionList($this['versionList'])
 
     // Owner
     ->addField('owner', function($version) {
-        return $this->import->component('UserLink', '~admin/users/', $version['owner']);
+        return $this->import->component('UserLink', '~admin/users/clients/', $version['owner']);
     })
 
     // Actions

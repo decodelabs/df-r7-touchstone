@@ -46,7 +46,7 @@ class PostList extends arch\component\template\CollectionList {
 // Owner
     public function addOwnerField($list) {
         $list->addField('owner', function($post) {
-            return $this->import->component('UserLink', '~admin/users/', $post['owner'])
+            return $this->import->component('UserLink', '~admin/users/clients/', $post['owner'])
                 ->setDisposition('transitive');
         });
     }

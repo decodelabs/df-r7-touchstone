@@ -41,7 +41,7 @@ class HttpDelete extends arch\form\template\Delete {
 
             // Owner
             ->addField('owner', function($post) {
-                return $this->import->component('UserLink', '~admin/users/', $post['owner']);
+                return $this->import->component('UserLink', '~admin/users/clients/', $post['owner']);
             })
 
             // Versions
