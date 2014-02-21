@@ -12,6 +12,8 @@ use df\arch;
     
 class DetailHeaderBar extends arch\component\template\HeaderBar {
 
+    protected $_icon = 'post';
+    
     protected function _getDefaultTitle() {
         return $this->_('Post: %t%', ['%t%' => $this->_record['slug']]);
     }
