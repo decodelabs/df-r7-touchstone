@@ -23,6 +23,7 @@ class HttpAdd extends arch\form\Action {
 
     protected function _setupDelegates() {
         $this->loadDelegate('labels', 'LabelSelector', '~/navigation/labels/')
+            ->setDefaultContext('Posts')
             ->isForMany(true)
             ->isRequired(true);
 
