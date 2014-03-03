@@ -14,6 +14,7 @@ class PostList extends arch\component\template\CollectionList {
 
     protected $_fields = [
         'slug' => true,
+        'title' => false,
         'labels' => true,
         'owner' => true,
         'creationDate' => true,
@@ -28,6 +29,14 @@ class PostList extends arch\component\template\CollectionList {
 // Slug
     public function addSlugField($list) {
         $list->addField('slug', function($post) {
+            return $this->import->component('PostLink', '~admin/posts/', $post)
+                ->setRedirectFrom($this->_urlRedirect);
+        });
+    }
+
+// Title
+    public function addTitleField($list) {
+        $list->addField('title', function($post) {
             return $this->import->component('PostLink', '~admin/posts/', $post)
                 ->setRedirectFrom($this->_urlRedirect);
         });

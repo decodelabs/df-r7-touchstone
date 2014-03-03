@@ -57,7 +57,7 @@ echo $this->html->attributeList($this['post'])
 
     // Labels
     ->addField('labels', function($post) {
-        return $this->html->bulletList($post->labels->fetch(), function($label) {
+        return $this->html->bulletList($post->labels->select(), function($label) {
             return $this->import->component('LabelLink', '~admin/navigation/labels/', $label);
         });
     })

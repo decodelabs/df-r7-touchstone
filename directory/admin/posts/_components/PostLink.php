@@ -20,6 +20,10 @@ class PostLink extends arch\component\template\RecordLink {
     }
 
     protected function _getRecordName() {
+        if(isset($this->_record['title'])) {
+            return $this->_record['title'];
+        }
+        
         return $this->_record['slug'];
     }
 }

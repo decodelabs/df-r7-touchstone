@@ -19,8 +19,16 @@ class HttpController extends arch\Controller {
         $view['postList'] = $model->post->select()
             ->countRelation('versions')
             ->populate('owner')
-            ->populate('labels')
-            ->paginateWith($this->request->query);
+            ->populateSelect('labels')
+
+            ->leftJoin('title')
+                ->from('axis://touchstone/PostVersion', 'version')
+                ->on('version.id', '=', 'post.activeVersion')
+                ->endJoin()
+
+            ->paginate()
+                ->addOrderableFields('title')
+                ->applyWith($this->request->query);
 
         return $view;
     }
