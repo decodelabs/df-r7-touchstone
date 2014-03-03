@@ -21,7 +21,8 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('slug', 'Slug');
 
         // Labels
-        $schema->addField('labels', 'Many', 'nightfire/label');
+        $schema->addField('labels', 'Many', 'nightfire/label')
+            ->setBridgeUnitId('nightfire/labelBridge');
 
         // Created
         $schema->addIndexedField('creationDate', 'Timestamp');

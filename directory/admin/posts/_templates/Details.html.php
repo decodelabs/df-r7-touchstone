@@ -64,7 +64,8 @@ echo $this->html->attributeList($this['post'])
 
     // Header Image
     ->addField('headerImage', function($post) {
-        return $this->import->component('FileLink', '~admin/media/', $post['activeVersion']['headerImage']);
+        return $this->import->component('FileLink', '~admin/media/', $post['activeVersion']['headerImage'])
+            ->isNullable(true);
     })
 
     // Intro
