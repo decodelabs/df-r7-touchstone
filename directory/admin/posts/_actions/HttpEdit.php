@@ -55,7 +55,7 @@ class HttpEdit extends HttpAdd {
         ]);
 
         $this->getDelegate('labels')->setSelected(
-            $this->_post->labels->getRelatedPrimaryKeys()
+            $this->_post->labels->fetchBridgePartials()
         );
 
         $this->getDelegate('headerImage')->setSelected($this->_version->getRawId('headerImage'));

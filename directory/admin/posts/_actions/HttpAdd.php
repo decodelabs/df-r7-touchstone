@@ -25,6 +25,7 @@ class HttpAdd extends arch\form\Action {
         $this->loadDelegate('labels', 'LabelSelector', '~/navigation/labels/')
             ->setDisposition('Posts')
             ->shouldAllowShared(false)
+            ->shouldSelectPrimary(true)
             ->isForMany(true)
             ->isRequired(true);
 
