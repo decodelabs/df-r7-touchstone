@@ -18,8 +18,8 @@ class HttpController extends arch\Controller {
 
         $view['postList'] = $model->post->select()
             ->countRelation('versions')
-            ->populate('owner')
-            ->populateSelect('labels')
+            ->populateSelect('owner', 'id', 'fullName')
+            ->populateSelect('labels', 'id', 'slug', 'name')
 
             ->leftJoin('title')
                 ->from('axis://touchstone/PostVersion', 'version')
