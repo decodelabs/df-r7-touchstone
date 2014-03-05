@@ -128,7 +128,7 @@ class HttpAdd extends arch\form\Action {
             ->addField('slug', 'slug')
                 ->setDefaultValueField('title')
                 ->isRequired(true)
-                ->setStorageAdapter($this->data->nightfire->label)
+                ->setStorageAdapter($this->data->touchstone->post)
                 ->setUniqueFilterId($this->_post['id'])
                 ->end()
 
