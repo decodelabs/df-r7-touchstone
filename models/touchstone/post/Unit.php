@@ -62,4 +62,10 @@ class Unit extends axis\unit\table\Base {
             
         return $this;
     }
+
+
+// Query blocks
+    public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
+        $query->leftJoinRelation('activeVersion', 'title');
+    }
 }

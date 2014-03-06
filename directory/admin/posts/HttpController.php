@@ -18,14 +18,9 @@ class HttpController extends arch\Controller {
 
         $view['postList'] = $model->post->select()
             ->countRelation('versions')
-            ->populateSelect('owner', 'id', 'fullName')
-            ->populateSelect('labels', 'id', 'slug', 'name')
-
-            ->leftJoin('title')
-                ->from('axis://touchstone/PostVersion', 'version')
-                ->on('version.id', '=', 'post.activeVersion')
-                ->endJoin()
-
+            ->importRelationBlock('labels', 'link')
+            ->importRelationBlock('owner', 'link')
+            ->importBlock('title')
             ->paginate()
                 ->addOrderableFields('title')
                 ->applyWith($this->request->query);
