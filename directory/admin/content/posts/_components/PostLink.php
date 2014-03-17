@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\posts\_components;
+namespace df\apex\directory\admin\content\posts\_components;
 
 use df;
 use df\core;
@@ -16,7 +16,7 @@ class PostLink extends arch\component\template\RecordLink {
 
 // Url
     protected function _getRecordUrl($id) {
-        return '~admin/posts/details?post='.$id;
+        return '~admin/content/posts/details?post='.$id;
     }
 
     protected function _getRecordName() {

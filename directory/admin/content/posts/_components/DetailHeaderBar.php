@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\posts\_components;
+namespace df\apex\directory\admin\content\posts\_components;
 
 use df;
 use df\core;
@@ -21,13 +21,13 @@ class DetailHeaderBar extends arch\component\template\HeaderBar {
     protected function _addOperativeLinks($menu) {
         $menu->addLinks(
             // Edit
-            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Edit post'))
+            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Edit post'))
                 ->setAction('edit'),
 
             // Delete
-            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Delete post'))
+            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Delete post'))
                 ->setAction('delete')
-                ->setRedirectTo('~admin/posts/')
+                ->setRedirectTo('~admin/content/posts/')
         );  
     }
 
@@ -37,18 +37,18 @@ class DetailHeaderBar extends arch\component\template\HeaderBar {
 
         $menu->addLinks(
             // Details
-            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Details'), true)
+            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Details'), true)
                 ->setAction('details')
                 ->setIcon('details'),
 
             // Comments
-            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Comments'), true)
+            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Comments'), true)
                 ->setAction('comments')
                 ->setIcon('comment')
                 ->setNote($this->format->counterNote($commentCount)),
 
             // Versions
-            $this->import->component('PostLink', '~admin/posts/', $this->_record, $this->_('Versions'), true)
+            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Versions'), true)
                 ->setAction('versions')
                 ->setIcon('list')
                 ->setNote($this->format->counterNote($versionCount))

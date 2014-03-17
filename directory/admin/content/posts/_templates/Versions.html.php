@@ -1,6 +1,6 @@
 <?php
 
-echo $this->import->component('DetailHeaderBar', '~admin/posts/', $this['post']);
+echo $this->import->component('DetailHeaderBar', '~admin/content/posts/', $this['post']);
 
 echo $this->html->collectionList($this['versionList'])
     
@@ -33,26 +33,26 @@ echo $this->html->collectionList($this['versionList'])
 
         return [
             $this->html->link(
-                    $this->uri->request('~admin/posts/activate-version?version='.$version['id'], true),
+                    $this->uri->request('~admin/content/posts/activate-version?version='.$version['id'], true),
                     $this->_('Activate')
                 )
                 ->setIcon('accept')
                 ->isDisabled($isActive),
 
             $this->html->link(
-                    $this->uri->request('~admin/posts/edit?post='.$this['post']['id'].'&rebase='.$version['id'], true),
+                    $this->uri->request('~admin/content/posts/edit?post='.$this['post']['id'].'&rebase='.$version['id'], true),
                     $this->_('Rebase')
                 )
                 ->setIcon('add'),
 
             $this->html->link(
-                    $this->uri->request('~admin/posts/edit?post='.$this['post']['id'].'&version='.$version['id'], true),
+                    $this->uri->request('~admin/content/posts/edit?post='.$this['post']['id'].'&version='.$version['id'], true),
                     $this->_('Edit')
                 )
                 ->setIcon('edit'),
 
             $this->html->link(
-                    $this->uri->request('~admin/posts/delete-version?version='.$version['id'], true),
+                    $this->uri->request('~admin/content/posts/delete-version?version='.$version['id'], true),
                     $this->_('Purge')
                 )
                 ->setIcon('delete')

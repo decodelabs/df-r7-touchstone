@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\posts\_components;
+namespace df\apex\directory\admin\content\posts\_components;
 
 use df;
 use df\core;
@@ -21,7 +21,7 @@ class IndexHeaderBar extends arch\component\template\HeaderBar {
     protected function _addOperativeLinks($menu) {
         $menu->addLinks(
             $this->html->link(
-                    $this->uri->request('~admin/posts/add', true),
+                    $this->uri->request('~admin/content/posts/add', true),
                     $this->_('Add new post')
                 )
                 ->setIcon('add')

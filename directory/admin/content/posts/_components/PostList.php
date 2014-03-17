@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\posts\_components;
+namespace df\apex\directory\admin\content\posts\_components;
 
 use df;
 use df\core;
@@ -29,7 +29,7 @@ class PostList extends arch\component\template\CollectionList {
 // Slug
     public function addSlugField($list) {
         $list->addField('slug', function($post) {
-            return $this->import->component('PostLink', '~admin/posts/', $post)
+            return $this->import->component('PostLink', '~admin/content/posts/', $post)
                 ->setRedirectFrom($this->_urlRedirect);
         });
     }
@@ -37,7 +37,7 @@ class PostList extends arch\component\template\CollectionList {
 // Title
     public function addTitleField($list) {
         $list->addField('title', function($post) {
-            return $this->import->component('PostLink', '~admin/posts/', $post)
+            return $this->import->component('PostLink', '~admin/content/posts/', $post)
                 ->setRedirectFrom($this->_urlRedirect);
         });
     }
@@ -111,11 +111,11 @@ class PostList extends arch\component\template\CollectionList {
         $list->addField('actions', function($post) {
             return [
                 // Edit
-                $this->import->component('PostLink', '~admin/posts/', $post, $this->_('Edit'))
+                $this->import->component('PostLink', '~admin/content/posts/', $post, $this->_('Edit'))
                     ->setAction('edit'),
 
                 // Delete
-                $this->import->component('PostLink', '~admin/posts/', $post, $this->_('Delete'))
+                $this->import->component('PostLink', '~admin/content/posts/', $post, $this->_('Delete'))
                     ->setAction('delete')
             ];
         });

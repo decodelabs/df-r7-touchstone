@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\_menus;
+namespace df\apex\directory\admin\content\_menus;
 
 use df;
 use df\core;
@@ -14,7 +14,7 @@ class Index_Touchstone extends arch\navigation\menu\Base {
 
     protected function _createEntries(arch\navigation\IEntryList $entryList) {
         $entryList->addEntries(
-             $entryList->newLink('~admin/posts/', 'Posts')
+             $entryList->newLink('~admin/content/posts/', 'Posts')
                 ->setId('posts')
                 ->setDescription('Write and publish news and blog posts')
                 ->setIcon('post')
