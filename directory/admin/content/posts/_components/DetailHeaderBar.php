@@ -31,27 +31,13 @@ class DetailHeaderBar extends arch\component\template\HeaderBar {
         );  
     }
 
+    protected function _addSubOperativeLinks($menu) {
+        if($this->slot->has('subOperativeLinks')) {
+            $menu->addLinks($this->slot->getValue('subOperativeLinks'));
+        }
+    }
+
     protected function _addSectionLinks($menu) {
-        $versionCount = $this->_record->versions->select()->count();
-        $commentCount = $this->data->interact->comment->countFor($this->_record);
-
-        $menu->addLinks(
-            // Details
-            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Details'), true)
-                ->setAction('details')
-                ->setIcon('details'),
-
-            // Comments
-            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Comments'), true)
-                ->setAction('comments')
-                ->setIcon('comment')
-                ->setNote($this->format->counterNote($commentCount)),
-
-            // Versions
-            $this->import->component('PostLink', '~admin/content/posts/', $this->_record, $this->_('Versions'), true)
-                ->setAction('versions')
-                ->setIcon('list')
-                ->setNote($this->format->counterNote($versionCount))
-        );
+        $menu->addLinks('directory://~admin/content/posts/SectionLinks');
     }
 }

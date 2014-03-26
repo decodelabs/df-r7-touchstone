@@ -13,6 +13,8 @@ use df\axis;
     
 class Record extends opal\record\Base {
     
+    const BROADCAST_HOOK_EVENTS = true;
+    
     public function getBodySlotDefinition() {
         return $this->getRecordAdapter()
             ->getModel()

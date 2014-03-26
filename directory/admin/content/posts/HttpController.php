@@ -30,21 +30,21 @@ class HttpController extends arch\Controller {
 
     public function detailsHtmlAction() {
         $view = $this->aura->getView('Details.html');
-        $this->_fetchPost($view);
+        $this->fetchPost($view);
 
         return $view;
     }
 
     public function commentsHtmlAction() {
         $view = $this->aura->getView('Comments.html');
-        $this->_fetchPost($view);
+        $this->fetchPost($view);
 
         return $view;
     }
 
     public function versionsHtmlAction() {
         $view = $this->aura->getView('Versions.html');
-        $this->_fetchPost($view);
+        $this->fetchPost($view);
 
         $view['versionList'] = $view['post']->versions->fetch()
             ->orderBy('creationDate DESC');
@@ -52,7 +52,7 @@ class HttpController extends arch\Controller {
         return $view;
     }
 
-    protected function _fetchPost($view) {
+    public function fetchPost($view) {
         $view['post'] = $this->data->fetchForAction(
             'axis://touchstone/Post',
             $this->request->query['post']
