@@ -68,4 +68,15 @@ class Unit extends axis\unit\table\Base {
     public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
         $query->leftJoinRelation('activeVersion', 'title');
     }
+
+    public function applyLabelSlugClauseQueryBlock(opal\query\IReadQuery $query, array $slugs) {
+        $query
+            ->whereCorrelation('id', 'in', 'post')
+                ->from($this->getBridgeUnit('labels'), 'bridge')
+                ->whereCorrelation('label', 'in', 'id')
+                    ->from('axis://nightfire/Label', 'labels')
+                    ->where('labels.slug', 'in', $slugs)
+                    ->endCorrelation()
+                ->endCorrelation();
+    }
 }
