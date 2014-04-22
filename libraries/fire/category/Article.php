@@ -12,5 +12,5 @@ use df\fire;
 class Article extends Base {
 
     protected static $_requiredOutputTypes = ['Html'];
-    protected static $_defaultBlocks = ['SimpleTags', 'RawHtml', 'LibraryImage'];
+    protected static $_defaultBlocks = ['SimpleTags', 'RawHtml', 'LibraryImage', 'Audioboo'];
 }
