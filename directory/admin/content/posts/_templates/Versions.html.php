@@ -1,7 +1,5 @@
 <?php
 
-echo $this->import->component('DetailHeaderBar', '~admin/content/posts/', $this['post']);
-
 echo $this->html->collectionList($this['versionList'])
     
     // Title

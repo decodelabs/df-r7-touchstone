@@ -15,6 +15,17 @@ class Record extends opal\record\Base {
     
     const BROADCAST_HOOK_EVENTS = true;
     
+    protected function _onPreDelete($taskSet, $task) {
+        $id = $this['id'];
+
+        $delTask = $taskSet->addRawQuery('deleteVersions', 
+            $this->getRecordAdapter()->getModel()->postVersion->delete()
+                ->where('post', '=', $this)
+        );
+
+        $task->addDependency($delTask);
+    }
+
     public function getBodySlotDefinition() {
         return $this->getRecordAdapter()
             ->getModel()
