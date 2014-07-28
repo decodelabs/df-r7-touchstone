@@ -121,7 +121,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         });
     }
 
-    public function defineIsPersonalField($list) {
+    public function defineIsPersonalField($list, $mode) {
         $list->addField('isPersonal', function($post) {
             return $this->html->booleanIcon($post['isPersonal']);
         });
@@ -142,7 +142,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         });
     }
 
-    public function defineArchiveDateField($list) {
+    public function defineArchiveDateField($list, $mode) {
         $list->addField('archiveDate', $this->_('Archive'), function($post, $context) {
             if($post['archiveDate']) {
                 $output = $this->html->date($post['archiveDate'], 'short');
