@@ -148,8 +148,8 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
                 $output = $this->html->date($post['archiveDate'], 'short');
 
                 if($post['archiveDate']->isPast()) {
-                    $output->addClass('disposition-negative');
-                    $context->getRowTag()->addClass('state-lowPriority');
+                    $output->addClass('negative');
+                    $context->getRowTag()->addClass('inactive');
                 }
 
                 return $output;

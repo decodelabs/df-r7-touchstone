@@ -26,7 +26,7 @@ echo $this->html->collectionList($this['versionList'])
 
         if($version['id'] == $this['post']->getRawId('activeVersion')) {
             $isActive = true;
-            $context->getRowTag()->addClass('state-active');
+            $context->getRowTag()->addClass('active');
         }
 
         return [
