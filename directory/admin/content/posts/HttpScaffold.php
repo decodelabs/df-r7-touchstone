@@ -89,7 +89,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             ), 'warning');
         }
 
-        $output[] = $this->import->component('Comment', '~/comments/', $post->getEntityLocator())
+        $output[] = $this->import->component('~/comments/Comment', $post->getEntityLocator())
             ->shouldDisplayAsTree(true)
             ->shouldShowForm($post['allowComments'])
             ->shouldShowInactive(true);
@@ -136,7 +136,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             }
 
             return $this->html->bulletList($labels, function($label) {
-                return $this->import->component('LabelLink', '~admin/navigation/labels/', $label)
+                return $this->import->component('~admin/navigation/labels/LabelLink', $label)
                     ->setDisposition('transitive');
             });
         });
@@ -167,7 +167,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
     public function defineHeaderImageField($list, $mode) {
         $list->addField('headerImage', function($post) {
-            return $this->import->component('FileLink', '~admin/media/', $post['activeVersion']['headerImage'])
+            return $this->import->component('~admin/media/FileLink', $post['activeVersion']['headerImage'])
                 ->isNullable(true);
         });
     }
