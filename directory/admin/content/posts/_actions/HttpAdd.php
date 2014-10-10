@@ -22,23 +22,23 @@ class HttpAdd extends arch\form\Action {
     }
 
     protected function _setupDelegates() {
-        $this->loadDelegate('labels', '~/navigation/labels/LabelSelector')
+        $this->loadDelegate('labels', '~admin/navigation/labels/LabelSelector')
             ->setDisposition('Posts')
             ->shouldAllowShared(true)
             ->shouldSelectPrimary(true)
             ->isForMany(true)
             ->isRequired(true);
 
-        $this->loadDelegate('headerImage', '~/media/FileSelector')
+        $this->loadDelegate('headerImage', '~admin/media/FileSelector')
             ->setAcceptTypes('image/*')
             ->isForOne(true)
             ->isRequired(false);
 
-        $this->loadDelegate('intro', '~/nightfire/ContentBlock')
+        $this->loadDelegate('intro', '~admin/nightfire/ContentBlock')
             ->setCategory('Description')
             ->isRequired(true);
 
-        $this->loadDelegate('body', '~/nightfire/ContentSlot')
+        $this->loadDelegate('body', '~admin/nightfire/ContentSlot')
             ->isRequired(true)
             ->setSlotDefinition($this->_post->getBodySlotDefinition());
     }
