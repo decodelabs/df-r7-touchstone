@@ -132,6 +132,26 @@ class HttpAdd extends arch\form\Action {
                 ->setUniqueFilterId($this->_post['id'])
                 ->end()
 
+            // Labels
+            ->addField('labels', 'delegate')
+                ->fromForm($this)
+                ->end()
+
+            // Header image
+            ->addField('headerImage', 'delegate')
+                ->fromForm($this)
+                ->end()
+
+            // Intro
+            ->addField('intro', 'delegate')
+                ->fromForm($this)
+                ->end()
+
+            // Body
+            ->addField('body', 'delegate')
+                ->fromForm($this)
+                ->end()
+
             // Archive date
             ->addField('archiveDate', 'Date')
                 ->end()
@@ -154,17 +174,12 @@ class HttpAdd extends arch\form\Action {
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'isLive', 'isPersonal', 'allowComments'
+                'slug', 'archiveDate', 'labels', 'isLive', 'isPersonal', 'allowComments'
             ])
             ->applyTo($this->_version, [
-                'title', 'displayIntro'
+                'title', 'headerImage', 'intro', 'displayIntro', 'body'
             ]);
 
-
-        $this->_post->labels = $this->getDelegate('labels')->apply();
-        $this->_version->headerImage = $this->getDelegate('headerImage')->apply();
-        $this->_version->intro = $this->getDelegate('intro')->apply();
-        $this->_version->body = $this->getDelegate('body')->apply();
 
 
         if($this->isValid()) {
