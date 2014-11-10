@@ -120,57 +120,44 @@ class HttpAdd extends arch\form\Action {
         $validator = $this->data->newValidator()
 
             // Title
-            ->addField('title', 'text')
-                ->isRequired(true)
-                ->end()
+            ->addRequiredField('title', 'text')
 
             // Slug
-            ->addField('slug', 'slug')
+            ->addRequiredField('slug', 'slug')
                 ->setDefaultValueField('title')
-                ->isRequired(true)
                 ->setStorageAdapter($this->data->touchstone->post)
                 ->setUniqueFilterId($this->_post['id'])
-                ->end()
 
             // Labels
             ->addField('labels', 'delegate')
                 ->fromForm($this)
-                ->end()
 
             // Header image
             ->addField('headerImage', 'delegate')
                 ->fromForm($this)
-                ->end()
 
             // Intro
             ->addField('intro', 'delegate')
                 ->fromForm($this)
-                ->end()
 
             // Body
             ->addField('body', 'delegate')
                 ->fromForm($this)
-                ->end()
 
             // Archive date
             ->addField('archiveDate', 'Date')
-                ->end()
 
             // Is live
             ->addField('isLive', 'boolean')
-                ->end()
 
             // Is personal
             ->addField('isPersonal', 'boolean')
-                ->end()
 
             // Allow comments
             ->addField('allowComments', 'boolean')
-                ->end()
 
             // Display intro
             ->addField('displayIntro', 'boolean')
-                ->end()
 
             ->validate($this->values)
             ->applyTo($this->_post, [
