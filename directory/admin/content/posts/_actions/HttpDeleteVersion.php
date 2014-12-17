@@ -26,7 +26,7 @@ class HttpDeleteVersion extends arch\form\template\Delete {
         return $this->_version['id'];
     }
 
-    protected function _onSessionCreate() {
+    protected function _onSessionReady() {
         if($this->_version['id'] == $this->_version['post']->getRawId('activeVersion')) {
             $this->values->addError('active', $this->_(
                 'This version is currently active and cannot be deleted'
