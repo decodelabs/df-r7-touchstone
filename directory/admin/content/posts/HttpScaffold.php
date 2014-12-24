@@ -16,8 +16,8 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     const DIRECTORY_TITLE = 'Posts';
     const DIRECTORY_ICON = 'post';
     const RECORD_ADAPTER = 'axis://touchstone/Post';
-    const RECORD_NAME_KEY = 'title';
-    const RECORD_FALLBACK_NAME_KEY = 'slug';
+    const RECORD_NAME_FIELD = 'title';
+    const RECORD_FALLBACK_NAME_FIELD = 'slug';
 
     protected $_sections = [
         'details',
