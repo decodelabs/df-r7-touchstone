@@ -51,10 +51,10 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     }
 
     public function applyRecordQuerySearch(opal\query\ISelectQuery $query, $search, $mode) {
-        $query->beginWhereClause()
-            ->orWhere('title', 'matches', $search)
-            ->orWhere('slug', 'matches', $search)
-            ->endClause();
+        $query->searchFor($search, [
+            'title' => 10,
+            'jrl_activeVersion.body' => 0.5
+        ]);
     }
 
     protected function _fetchSectionItemCounts() {
