@@ -49,7 +49,7 @@ class HttpActivateVersion extends arch\form\template\Confirm {
 
             // Owner
             ->addField('owner', function($version) {
-                return $this->import->component('~admin/users/clients/UserLink', $version['owner']);
+                return $this->apex->component('~admin/users/clients/UserLink', $version['owner']);
             });
     }
 

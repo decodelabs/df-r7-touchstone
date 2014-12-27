@@ -96,7 +96,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             ), 'warning');
         }
 
-        $output[] = $this->import->component('~/comments/Comment', $post->getEntityLocator())
+        $output[] = $this->apex->component('~/comments/Comment', $post->getEntityLocator())
             ->shouldDisplayAsTree(true)
             ->shouldShowForm($post['allowComments'])
             ->shouldShowInactive(true);
@@ -105,7 +105,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     }
 
     public function renderVersionsSectionBody($post) {
-        $template = $this->import->template('Versions.html');
+        $template = $this->apex->template('Versions.html');
         $template['post'] = $post;
         $template['versionList'] = $post->versions->fetch()
             ->orderBy('creationDate DESC');
@@ -143,7 +143,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             }
 
             return $this->html->bulletList($labels, function($label) {
-                return $this->import->component('~admin/navigation/labels/LabelLink', $label)
+                return $this->apex->component('~admin/navigation/labels/LabelLink', $label)
                     ->setDisposition('transitive');
             });
         });
@@ -174,7 +174,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
     public function defineHeaderImageField($list, $mode) {
         $list->addField('headerImage', function($post) {
-            return $this->import->component('~admin/media/FileLink', $post['activeVersion']['headerImage'])
+            return $this->apex->component('~admin/media/FileLink', $post['activeVersion']['headerImage'])
                 ->isNullable(true);
         });
     }

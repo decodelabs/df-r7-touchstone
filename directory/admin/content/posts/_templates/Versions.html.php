@@ -17,7 +17,7 @@ echo $this->html->collectionList($this['versionList'])
 
     // Owner
     ->addField('owner', function($version) {
-        return $this->import->component('~admin/users/clients/UserLink', $version['owner']);
+        return $this->apex->component('~admin/users/clients/UserLink', $version['owner']);
     })
 
     // Actions

@@ -51,7 +51,7 @@ class HttpDeleteVersion extends arch\form\template\Delete {
 
             // Owner
             ->addField('owner', function($version) {
-                return $this->import->component('~admin/users/clients/UserLink', $version['owner']);
+                return $this->apex->component('~admin/users/clients/UserLink', $version['owner']);
             });
     }
 
