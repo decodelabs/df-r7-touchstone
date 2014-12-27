@@ -17,7 +17,6 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     const DIRECTORY_ICON = 'post';
     const RECORD_ADAPTER = 'axis://touchstone/Post';
     const RECORD_NAME_FIELD = 'title';
-    const RECORD_FALLBACK_NAME_FIELD = 'slug';
 
     protected $_sections = [
         'details',
@@ -64,6 +63,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             'versions' => $post->versions->select()->count(),
             'comments' => $this->data->interact->comment->countFor($post)
         ];
+    }
+
+    protected function _getRecordName($record) {
+        if(isset($record['title'])) {
+            return $record['title'];
+        } else {
+            return $record['slug'];
+        }
     }
 
 // Components
