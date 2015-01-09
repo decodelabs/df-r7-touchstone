@@ -54,6 +54,8 @@ class HttpEdit extends HttpAdd {
             'title', 'displayIntro'
         ]);
 
+        $this->getDelegate('category')->setSelected($this->_post->getRawId('category'));
+
         $this->getDelegate('labels')->setSelected(
             $this->_post->labels->fetchBridgePartials()
         );

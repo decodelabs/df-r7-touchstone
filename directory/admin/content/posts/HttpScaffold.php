@@ -29,12 +29,12 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     ];
 
     protected $_recordListFields = [
-        'title', 'labels', 'owner', 'creationDate', 'lastEditDate',
+        'title', 'category', 'labels', 'owner', 'creationDate', 'lastEditDate',
         'archiveDate', 'versions', 'isLive', 'actions'
     ];
 
     protected $_recordDetailsFields = [
-        'title', 'slug', 'owner', 'isPersonal', 'isLive',
+        'title', 'slug', 'owner', 'isPersonal', 'isLive', 'category',
         'versions', 'creationDate', 'lastEditDate', 'archiveDate',
         'labels', 'headerImage', 'intro', 'body'
     ];
@@ -42,6 +42,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 // Record data
     protected function _prepareRecordListQuery(opal\query\ISelectQuery $query, $mode) {
         $query->countRelation('versions')
+            ->importRelationBlock('category', 'link')
             ->importRelationBlock('labels', 'link')
             ->importRelationBlock('owner', 'link')
             ->importBlock('title')
@@ -76,6 +77,10 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 // Components
     public function addIndexTransitiveLinks($menu, $bar) {
         $menu->addLinks(
+            $this->html->link('./categories/', $this->_('Categories'))
+                ->setIcon('category')
+                ->setDisposition('transitive'),
+
             $this->html->link(
                     '~admin/navigation/labels/',
                     $this->_('Labels')
@@ -131,6 +136,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     public function defineIsPersonalField($list, $mode) {
         $list->addField('isPersonal', function($post) {
             return $this->html->booleanIcon($post['isPersonal']);
+        });
+    }
+
+    public function defineCategoryField($list, $mode) {
+        $list->addField('category', function($post) {
+            return $this->apex->component('./categories/CategoryLink', $post['category'])
+                ->isNullable(true)
+                ->setDisposition('transitive');
         });
     }
 

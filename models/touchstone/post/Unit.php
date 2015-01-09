@@ -24,6 +24,10 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('labels', 'Many', 'nightfire/label')
             ->setBridgeUnitId('nightfire/labelBridge');
 
+        // Category
+        $schema->addField('category', 'ManyToOne', 'category', 'posts')
+            ->isNullable(true);
+
         // Created
         $schema->addIndexedField('creationDate', 'Timestamp');
 

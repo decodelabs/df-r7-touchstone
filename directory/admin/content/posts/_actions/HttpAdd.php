@@ -22,6 +22,11 @@ class HttpAdd extends arch\form\Action {
     }
 
     protected function _setupDelegates() {
+        $this->loadDelegate('category', './categories/CategorySelector')
+            ->isForOne(true)
+            ->isRequired(false)
+            ->setDefaultSearchString('*');
+
         $this->loadDelegate('labels', '~admin/navigation/labels/LabelSelector')
             ->setDisposition('Posts')
             ->shouldAllowShared(true)
@@ -47,6 +52,10 @@ class HttpAdd extends arch\form\Action {
         $this->values->isLive = true;
         $this->values->displayIntro = true;
         $this->values->allowComments = true;
+
+        if(isset($this->request->query->category)) {
+            $this->getDelegate('category')->setSelected($this->request->query['category']);
+        }
     }
 
     protected function _createUi() {
@@ -92,6 +101,10 @@ class HttpAdd extends arch\form\Action {
             ))
         );
 
+
+        // Category
+        $fs->push($this->getDelegate('category')->renderFieldArea($this->_('Category')));
+
         // Labels
         $fs->push($this->getDelegate('labels')->renderFieldArea($this->_('Labels')));
 
@@ -128,6 +141,10 @@ class HttpAdd extends arch\form\Action {
                 ->setStorageAdapter($this->data->touchstone->post)
                 ->setUniqueFilterId($this->_post['id'])
 
+            // Category
+            ->addField('category', 'delegate')
+                ->fromForm($this)
+
             // Labels
             ->addField('labels', 'delegate')
                 ->fromForm($this)
@@ -161,7 +178,7 @@ class HttpAdd extends arch\form\Action {
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'labels', 'isLive', 'isPersonal', 'allowComments'
+                'slug', 'archiveDate', 'category', 'labels', 'isLive', 'isPersonal', 'allowComments'
             ])
             ->applyTo($this->_version, [
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'
