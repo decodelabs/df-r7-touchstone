@@ -21,7 +21,7 @@ class HttpEdit extends HttpAdd {
     }
 
     protected function _setDefaultValues() {
-        $this->values->importForm($this->_category, [
+        $this->values->importFrom($this->_category, [
             'name', 'slug', 'color', 'description'
         ]);
 
