@@ -14,7 +14,7 @@ class Index_Touchstone extends arch\navigation\menu\Base {
 
     protected function _createEntries(arch\navigation\IEntryList $entryList) {
         $entryList->addEntries(
-             $entryList->newLink('~admin/content/posts/', 'Posts')
+             $entryList->newLink('./posts/', 'Posts')
                 ->setId('posts')
                 ->setDescription('Write and publish news and blog posts')
                 ->setIcon('post')

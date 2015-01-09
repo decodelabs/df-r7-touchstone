@@ -31,26 +31,26 @@ echo $this->html->collectionList($this['versionList'])
 
         return [
             $this->html->link(
-                    $this->uri('~admin/content/posts/activate-version?version='.$version['id'], true),
+                    $this->uri('./activate-version?version='.$version['id'], true),
                     $this->_('Activate')
                 )
                 ->setIcon('accept')
                 ->isDisabled($isActive),
 
             $this->html->link(
-                    $this->uri('~admin/content/posts/edit?post='.$this['post']['id'].'&rebase='.$version['id'], true),
+                    $this->uri('./edit?post='.$this['post']['id'].'&rebase='.$version['id'], true),
                     $this->_('Rebase')
                 )
                 ->setIcon('add'),
 
             $this->html->link(
-                    $this->uri('~admin/content/posts/edit?post='.$this['post']['id'].'&version='.$version['id'], true),
+                    $this->uri('./edit?post='.$this['post']['id'].'&version='.$version['id'], true),
                     $this->_('Edit')
                 )
                 ->setIcon('edit'),
 
             $this->html->link(
-                    $this->uri('~admin/content/posts/delete-version?version='.$version['id'], true),
+                    $this->uri('./delete-version?version='.$version['id'], true),
                     $this->_('Purge')
                 )
                 ->setIcon('delete')
