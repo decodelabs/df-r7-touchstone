@@ -29,14 +29,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     ];
 
     protected $_recordListFields = [
-        'title', 'category', 'tags', 'labels', 'owner', 'creationDate', 'lastEditDate',
+        'title', 'category', 'tags', 'owner', 'creationDate', 'lastEditDate',
         'archiveDate', 'versions', 'isLive', 'actions'
     ];
 
     protected $_recordDetailsFields = [
         'title', 'slug', 'owner', 'isPersonal', 'isLive', 'category', 'tags',
         'versions', 'creationDate', 'lastEditDate', 'archiveDate',
-        'labels', 'headerImage', 'intro', 'body'
+        'headerImage', 'intro', 'body'
     ];
 
 // Record data
@@ -44,7 +44,6 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         $query->countRelation('versions')
             ->importRelationBlock('category', 'link')
             ->importRelationBlock('tags', 'link')
-            ->importRelationBlock('labels', 'link')
             ->importRelationBlock('owner', 'link')
             ->importBlock('title')
             ->paginate()
@@ -84,13 +83,6 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
             $this->html->link('./tags/', $this->_('Tags'))
                 ->setIcon('tag')
-                ->setDisposition('transitive'),
-
-            $this->html->link(
-                    '~admin/navigation/labels/',
-                    $this->_('Labels')
-                )
-                ->setIcon('label')
                 ->setDisposition('transitive')
         );  
     }
@@ -153,32 +145,19 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     }
 
     public function defineTagsField($list, $mode) {
-        $list->addField('tags', function($post) use($mode) {
+        $list->addField('tags', function($post, $context) use($mode) {
             if($mode == 'list') {
                 $tags = $post['tags'];
+                $context->cellTag['width'] = '20%';
             } else {
                 $tags = $post->tags->select();
             }
 
             return $this->html->commaList($tags, function($tag) {
-                return $this->apex->component('./tags/TagLink', $tag)
-                    ->setDisposition('transitive');
-            });
-        });
-    }
-
-    public function defineLabelsField($list, $mode) {
-        $list->addField('labels', function($post) use($mode) {
-            if($mode == 'list') {
-                $labels = $post['labels'];
-            } else {
-                $labels = $post->labels->select();
-            }
-
-            return $this->html->bulletList($labels, function($label) {
-                return $this->apex->component('~admin/navigation/labels/LabelLink', $label)
-                    ->setDisposition('transitive');
-            });
+                    return $this->apex->component('./tags/TagLink', $tag)
+                        ->setDisposition('transitive');
+                })
+                ->setLimit(9);
         });
     }
 
