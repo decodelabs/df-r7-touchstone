@@ -31,13 +31,6 @@ class HttpAdd extends arch\form\Action {
             ->isForMany(true)
             ->isRequired(false);
 
-        $this->loadDelegate('labels', '~admin/navigation/labels/LabelSelector')
-            ->setDisposition('Posts')
-            ->shouldAllowShared(true)
-            ->shouldSelectPrimary(true)
-            ->isForMany(true)
-            ->isRequired(true);
-
         $this->loadDelegate('headerImage', '~admin/media/FileSelector')
             ->setAcceptTypes('image/*')
             ->isForOne(true)
@@ -115,9 +108,6 @@ class HttpAdd extends arch\form\Action {
         // Tags
         $fs->push($this->getDelegate('tags')->renderFieldArea($this->_('Tags')));
 
-        // Labels
-        $fs->push($this->getDelegate('labels')->renderFieldArea($this->_('Labels')));
-
 
         $fs = $form->addFieldSet($this->_('Intro'));
 
@@ -162,10 +152,6 @@ class HttpAdd extends arch\form\Action {
             ->addField('tags', 'delegate')
                 ->fromForm($this)
 
-            // Labels
-            ->addField('labels', 'delegate')
-                ->fromForm($this)
-
             // Header image
             ->addField('headerImage', 'delegate')
                 ->fromForm($this)
@@ -195,7 +181,7 @@ class HttpAdd extends arch\form\Action {
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'category', 'tags', 'labels', 'isLive', 'isPersonal', 'allowComments'
+                'slug', 'archiveDate', 'category', 'tags', 'isLive', 'isPersonal', 'allowComments'
             ])
             ->applyTo($this->_version, [
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'

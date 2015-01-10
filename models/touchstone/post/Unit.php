@@ -20,10 +20,6 @@ class Unit extends axis\unit\table\Base {
         // Slug
         $schema->addField('slug', 'Slug');
 
-        // Labels
-        $schema->addField('labels', 'Many', 'nightfire/label')
-            ->setBridgeUnitId('nightfire/labelBridge');
-
         // Category
         $schema->addField('category', 'ManyToOne', 'category', 'posts')
             ->isNullable(true);
