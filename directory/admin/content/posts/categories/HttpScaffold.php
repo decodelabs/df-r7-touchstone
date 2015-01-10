@@ -72,6 +72,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         );
     }
 
+    public function addIndexTransitiveLinks($menu, $bar) {
+        $menu->addLinks(
+            $this->html->link('../tags/', $this->_('Tags'))
+                ->setIcon('tag')
+                ->setDisposition('transitive')
+        );  
+    }
+
 
 // Fields
     public function defineImageField($list, $mode) {

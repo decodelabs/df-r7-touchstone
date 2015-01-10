@@ -29,12 +29,12 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     ];
 
     protected $_recordListFields = [
-        'title', 'category', 'labels', 'owner', 'creationDate', 'lastEditDate',
+        'title', 'category', 'tags', 'labels', 'owner', 'creationDate', 'lastEditDate',
         'archiveDate', 'versions', 'isLive', 'actions'
     ];
 
     protected $_recordDetailsFields = [
-        'title', 'slug', 'owner', 'isPersonal', 'isLive', 'category',
+        'title', 'slug', 'owner', 'isPersonal', 'isLive', 'category', 'tags',
         'versions', 'creationDate', 'lastEditDate', 'archiveDate',
         'labels', 'headerImage', 'intro', 'body'
     ];
@@ -43,6 +43,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     protected function _prepareRecordListQuery(opal\query\ISelectQuery $query, $mode) {
         $query->countRelation('versions')
             ->importRelationBlock('category', 'link')
+            ->importRelationBlock('tags', 'link')
             ->importRelationBlock('labels', 'link')
             ->importRelationBlock('owner', 'link')
             ->importBlock('title')
@@ -79,6 +80,10 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         $menu->addLinks(
             $this->html->link('./categories/', $this->_('Categories'))
                 ->setIcon('category')
+                ->setDisposition('transitive'),
+
+            $this->html->link('./tags/', $this->_('Tags'))
+                ->setIcon('tag')
                 ->setDisposition('transitive'),
 
             $this->html->link(
@@ -144,6 +149,21 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             return $this->apex->component('./categories/CategoryLink', $post['category'])
                 ->isNullable(true)
                 ->setDisposition('transitive');
+        });
+    }
+
+    public function defineTagsField($list, $mode) {
+        $list->addField('tags', function($post) use($mode) {
+            if($mode == 'list') {
+                $tags = $post['tags'];
+            } else {
+                $tags = $post->tags->select();
+            }
+
+            return $this->html->commaList($tags, function($tag) {
+                return $this->apex->component('./tags/TagLink', $tag)
+                    ->setDisposition('transitive');
+            });
         });
     }
 

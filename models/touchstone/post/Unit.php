@@ -28,6 +28,10 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('category', 'ManyToOne', 'category', 'posts')
             ->isNullable(true);
 
+        // Tags
+        $schema->addField('tags', 'ManyToMany', 'tag', 'posts')
+            ->isDominant(true);
+
         // Created
         $schema->addIndexedField('creationDate', 'Timestamp');
 
