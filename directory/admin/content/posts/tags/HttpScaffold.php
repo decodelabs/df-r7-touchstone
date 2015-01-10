@@ -18,6 +18,13 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     const RECORD_ADAPTER = 'axis://touchstone/Tag';
     const RECORD_NAME_FIELD = 'slug';
 
+    protected $_sections = [
+        'details',
+        'posts' => [
+            'icon' => 'post'
+        ]
+    ];
+
     protected $_recordListFields = [
         'slug', 'name', 'posts', 'actions'
     ];
@@ -34,6 +41,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         return [
             'posts' => $tag->posts->select()->count()
         ];
+    }
+
+// Sections
+    public function renderPostsSectionBody($tag) {
+        return $this->apex->scaffold('../')
+            ->renderRecordList(
+                $tag->posts->select()
+            );
     }
 
 // Components
