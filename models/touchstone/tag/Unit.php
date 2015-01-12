@@ -46,7 +46,7 @@ class Unit extends axis\unit\table\Base {
     }
 
 // Query blocks
-    public function applyLinkRelationQueryBlock(opal\query\IReadQuery $query, $relationField) {
-        $query->populateSelect($relationField, 'id', 'name', 'slug');
+    public function applyLinkRelationQueryBlock(opal\query\IReadQuery $query, $relationField, array $extraFields=null) {
+        $query->populateSelect($relationField, 'id', 'name', 'slug', $extraFields);
     }
 }
