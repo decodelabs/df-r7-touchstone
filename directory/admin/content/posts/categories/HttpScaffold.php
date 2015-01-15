@@ -84,7 +84,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 // Fields
     public function defineImageField($list, $mode) {
         $list->addField('image', function($category) {
-            return $this->apex->component('~admin/media/FileLink', $category['image'])
+            return $this->apex->component('~admin/media/files/FileLink', $category['image'])
                 ->isNullable(true)
                 ->setDisposition('transitive');
         });

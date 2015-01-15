@@ -186,7 +186,8 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
     public function defineHeaderImageField($list, $mode) {
         $list->addField('headerImage', function($post) {
-            return $this->apex->component('~admin/media/FileLink', $post['activeVersion']['headerImage'])
+            return $this->apex->component('~admin/media/files/FileLink', $post['activeVersion']['headerImage'])
+                ->setDisposition('transitive')
                 ->isNullable(true);
         });
     }

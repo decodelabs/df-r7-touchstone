@@ -35,7 +35,9 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('title', 'String', 128);
 
         // Image
-        $schema->addField('headerImage', 'OneMediaFile', 'image')
+        $schema->addField('legacy_headerImage_id', 'Integer')
+            ->isNullable(true);
+        $schema->addField('headerImage', 'One', 'media/file')
             ->isNullable(true);
 
         // Intro

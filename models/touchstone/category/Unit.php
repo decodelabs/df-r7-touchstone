@@ -26,8 +26,11 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('description', 'BigString');
         $schema->addField('posts', 'OneToMany', 'post', 'category');
 
-        $schema->addField('image', 'OneMediaFile', 'image')
+        $schema->addField('legacy_image_id', 'Integer')
             ->isNullable(true);
+        $schema->addField('image', 'One', 'media/file')
+            ->isNullable(true);
+
         $schema->addField('color', 'String', 7)
             ->isNullable(true);
     }

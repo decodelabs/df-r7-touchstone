@@ -32,6 +32,7 @@ class HttpAdd extends arch\form\Action {
             ->isRequired(false);
 
         $this->loadDelegate('headerImage', '~admin/media/FileSelector')
+            ->setBucket('posts')
             ->setAcceptTypes('image/*')
             ->isForOne(true)
             ->isRequired(false);
