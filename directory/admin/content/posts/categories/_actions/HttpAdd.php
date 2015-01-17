@@ -50,7 +50,9 @@ class HttpAdd extends arch\form\Action {
         );
 
         // Image
-        $fs->push($this->getDelegate('image')->renderFieldArea($this->_('Image')));
+        $fs->addFieldArea($this->_('Image'))->push(
+            $this->getDelegate('image')
+        );
 
         // Description
         $fs->addFieldArea($this->_('Description'))->push(

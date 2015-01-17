@@ -104,19 +104,27 @@ class HttpAdd extends arch\form\Action {
 
 
         // Category
-        $fs->push($this->getDelegate('category')->renderFieldArea($this->_('Category')));
+        $fs->addFieldArea($this->_('Category'))->push(
+            $this->getDelegate('category')
+        );
 
         // Tags
-        $fs->push($this->getDelegate('tags')->renderFieldArea($this->_('Tags')));
+        $fs->addFieldArea($this->_('Tags'))->push(
+            $this->getDelegate('tags')
+        );
 
 
         $fs = $form->addFieldSet($this->_('Intro'));
 
         // Image
-        $fs->push($this->getDelegate('headerImage')->renderFieldArea($this->_('Header image')));
+        $fs->addFieldArea($this->_('Header image'))->push(
+            $this->getDelegate('headerImage')
+        );
 
         // Intro
-        $fs->push($this->getDelegate('intro')->renderFieldArea($this->_('Intro')));
+        $fs->addFieldArea($this->_('Intro'))->push(
+            $this->getDelegate('intro')
+        );
 
         // Display intro
         $fs->addFieldArea()->push(
@@ -126,7 +134,9 @@ class HttpAdd extends arch\form\Action {
         );
 
         // Body
-        $form->push($this->getDelegate('body')->renderFieldSet($this->_('Body')));
+        $form->addFieldSet($this->_('Body'))->push(
+            $this->getDelegate('body')
+        );
 
 
         // Buttons
