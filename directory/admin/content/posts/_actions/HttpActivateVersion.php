@@ -26,7 +26,7 @@ class HttpActivateVersion extends arch\form\template\Confirm {
         return $this->_version['id'];
     }
 
-    protected function _getMainMessage() {
+    protected function _getMainMessage($itemName) {
         return $this->_(
             'Are you sure you want to activate this version?'
         );  
