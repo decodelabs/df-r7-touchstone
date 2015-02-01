@@ -139,8 +139,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     public function defineCategoryField($list, $mode) {
         $list->addField('category', function($post) {
             return $this->apex->component('./categories/CategoryLink', $post['category'])
-                ->isNullable(true)
-                ->setDisposition('transitive');
+                ->isNullable(true);
         });
     }
 
@@ -154,8 +153,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             }
 
             return $this->html->commaList($tags, function($tag) {
-                    return $this->apex->component('./tags/TagLink', $tag)
-                        ->setDisposition('transitive');
+                    return $this->apex->component('./tags/TagLink', $tag);
                 })
                 ->setLimit(9);
         });
@@ -187,7 +185,6 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     public function defineHeaderImageField($list, $mode) {
         $list->addField('headerImage', function($post) {
             return $this->apex->component('~admin/media/files/FileLink', $post['activeVersion']['headerImage'])
-                ->setDisposition('transitive')
                 ->isNullable(true);
         });
     }
