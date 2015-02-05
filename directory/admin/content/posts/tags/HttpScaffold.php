@@ -20,13 +20,11 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
     protected $_sections = [
         'details',
-        'posts' => [
-            'icon' => 'post'
-        ]
+        'posts' => 'post'
     ];
 
     protected $_recordListFields = [
-        'slug', 'name', 'posts', 'actions'
+        'slug', 'name', 'posts'
     ];
 
 // Record data

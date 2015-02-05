@@ -20,17 +20,13 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
     protected $_sections = [
         'details',
-        'comments' => [
-            'icon' => 'comment'
-        ],
-        'versions' => [
-            'icon' => 'list'
-        ]
+        'comments' => 'comment',
+        'versions' => 'list'
     ];
 
     protected $_recordListFields = [
         'title', 'category', 'tags', 'owner', 'creationDate', 'lastEditDate',
-        'archiveDate', 'versions', 'isLive', 'actions'
+        'archiveDate', 'versions', 'isLive'
     ];
 
     protected $_recordDetailsFields = [
