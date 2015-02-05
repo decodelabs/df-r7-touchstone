@@ -49,7 +49,8 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     public function applyRecordQuerySearch(opal\query\ISelectQuery $query, $search, $mode) {
         $query->searchFor($search, [
             'title' => 10,
-            'jrl_activeVersion.body' => 0.5
+            'activeVersion.intro' => 0.7,
+            'activeVersion.body' => 0.5
         ]);
     }
 
