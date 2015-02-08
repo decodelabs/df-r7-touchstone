@@ -58,7 +58,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         $post = $this->getRecord();
 
         return [
-            'versions' => $post->versions->select()->count(),
+            'versions' => $post->versions->countAll(),
             'comments' => $this->data->interact->comment->countFor($post)
         ];
     }

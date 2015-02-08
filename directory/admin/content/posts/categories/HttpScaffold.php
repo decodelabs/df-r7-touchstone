@@ -42,7 +42,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         $category = $this->getRecord();
 
         return [
-            'posts' => $category->posts->select()->count()
+            'posts' => $category->posts->countAll()
         ];
     }
 

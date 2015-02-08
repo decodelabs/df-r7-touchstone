@@ -37,7 +37,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         $tag = $this->getRecord();
 
         return [
-            'posts' => $tag->posts->select()->count()
+            'posts' => $tag->posts->countAll()
         ];
     }
 
