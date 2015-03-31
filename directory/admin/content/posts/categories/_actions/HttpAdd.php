@@ -15,7 +15,7 @@ class HttpAdd extends arch\form\Action {
     protected $_category;
 
     protected function _init() {
-        $this->_category = $this->data->newRecord('axis://touchstone/Category');
+        $this->_category = $this->scaffold->newRecord();
     }
 
     protected function _setupDelegates() {

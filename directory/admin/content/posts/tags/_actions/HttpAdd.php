@@ -15,7 +15,7 @@ class HttpAdd extends arch\form\Action {
     protected $_tag;
 
     protected function _init() {
-        $this->_tag = $this->data->newRecord('axis://touchstone/Tag');
+        $this->_tag = $this->scaffold->newRecord();
     }
 
     protected function _createUi() {

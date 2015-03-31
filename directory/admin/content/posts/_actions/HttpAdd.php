@@ -17,7 +17,7 @@ class HttpAdd extends arch\form\Action {
     protected $_keepVersion = false;
 
     protected function _init() {
-        $this->_post = $this->data->newRecord('axis://touchstone/Post');
+        $this->_post = $this->scaffold->newRecord();
         $this->_version = $this->data->newRecord('axis://touchstone/PostVersion');
     }
 
