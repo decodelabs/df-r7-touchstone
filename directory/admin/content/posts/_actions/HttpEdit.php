@@ -13,11 +13,7 @@ use df\arch;
 class HttpEdit extends HttpAdd {
 
     protected function _init() {
-        $this->_post = $this->data->fetchForAction(
-            'axis://touchstone/Post',
-            $this->request->query['post'],
-            'edit'
-        );
+        $this->_post = $this->scaffold->getRecord();
 
         $versionId = null;
 
