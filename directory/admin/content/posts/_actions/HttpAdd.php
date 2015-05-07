@@ -67,10 +67,9 @@ class HttpAdd extends arch\form\Action {
         );
 
         // Slug
-        $fs->addFieldArea($this->_('Slug'))->setDescription($this->_(
-            'Leave empty to generate from title'
-        ))->push(
+        $fs->addFieldArea($this->_('Slug'))->push(
             $this->html->textbox('slug', $this->values->slug)
+                ->setPlaceholder($this->_('Auto-generate from title'))
         );
 
         // Archive date
@@ -150,10 +149,9 @@ class HttpAdd extends arch\form\Action {
             ->addRequiredField('title', 'text')
 
             // Slug
-            ->addRequiredField('slug', 'slug')
+            ->addRequiredField('slug')
                 ->setDefaultValueField('title')
-                ->setStorageAdapter($this->data->touchstone->post)
-                ->setUniqueFilterId($this->_post['id'])
+                ->setRecord($this->_post)
 
             // Category
             ->addField('category', 'delegate')

@@ -38,10 +38,9 @@ class HttpAdd extends arch\form\Action {
         );
 
         // Slug
-        $fs->addFieldArea($this->_('Slug'))->setDescription($this->_(
-            'Leave empty to generate from name'
-        ))->push(
+        $fs->addFieldArea($this->_('Slug'))->push(
             $this->html->textbox('slug', $this->values->slug)
+                ->setPlaceholder($this->_('Auto-generate from name'))
         );
 
         // Color
@@ -71,13 +70,12 @@ class HttpAdd extends arch\form\Action {
                 ->setMaxLength(128)
 
             // Slug
-            ->addRequiredField('slug', 'slug')
+            ->addRequiredField('slug')
                 ->setDefaultValueField('name')
-                ->setStorageAdapter($this->data->touchstone->category)
-                ->setUniqueFilterId($this->_category['id'])
+                ->setRecord($this->_category)
 
             // Color
-            ->addField('color', 'color')
+            ->addField('color')
 
             // Image
             ->addField('image', 'delegate')
