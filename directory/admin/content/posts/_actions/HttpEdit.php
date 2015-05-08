@@ -50,10 +50,10 @@ class HttpEdit extends HttpAdd {
             'title', 'displayIntro'
         ]);
 
-        $this->getDelegate('category')->setSelected($this->_post->getRawId('category'));
-        $this->getDelegate('tags')->setSelected($this->_post->tags->getRelatedPrimaryKeys());
+        $this->getDelegate('category')->setSelected($this->_post['#category']);
+        $this->getDelegate('tags')->setSelected($this->_post['#tags']);
 
-        $this->getDelegate('headerImage')->setSelected($this->_version->getRawId('headerImage'));
+        $this->getDelegate('headerImage')->setSelected($this->_version['#headerImage']);
         $this->getDelegate('intro')->setBlock($this->_version['intro']);
         $this->getDelegate('body')->setSlotContent($this->_version['body']);
     }

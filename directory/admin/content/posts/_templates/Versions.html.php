@@ -24,7 +24,7 @@ echo $this->html->collectionList($this['versionList'])
     ->addField('actions', function($version, $context) {
         $isActive = false;
 
-        if($version['id'] == $this['post']->getRawId('activeVersion')) {
+        if($version['id'] == $this['post']['#activeVersion']) {
             $isActive = true;
             $context->getRowTag()->addClass('active');
         }

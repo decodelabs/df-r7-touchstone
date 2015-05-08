@@ -25,6 +25,6 @@ class HttpEdit extends HttpAdd {
             'name', 'slug', 'color', 'description'
         ]);
 
-        $this->getDelegate('image')->setSelected($this->_category->getRawId('image'));
+        $this->getDelegate('image')->setSelected($this->_category['#image']);
     }
 }
