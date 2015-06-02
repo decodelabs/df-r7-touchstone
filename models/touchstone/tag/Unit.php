@@ -13,18 +13,17 @@ use df\opal;
 
 class Unit extends axis\unit\table\Base {
     
+    protected $_defaultOrderableFields = [
+        'slug', 'name'
+    ];
+
+    protected $_defaultOrder = 'name ASC';
+
     protected function _onCreate(axis\schema\ISchema $schema) {
         $schema->addField('id', 'AutoId');
         $schema->addField('slug', 'Slug');
         $schema->addField('name', 'String', 128);
         $schema->addField('posts', 'ManyToMany', 'post', 'tags');
-    }
-
-    public function applyPagination(opal\query\IPaginator $paginator) {
-        $paginator->setOrderableFields('slug', 'name')
-            ->setDefaultOrder('name ASC');
-            
-        return $this;
     }
 
     public function ensureTagExists($slug, $name=null) {

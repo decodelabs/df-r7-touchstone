@@ -9,7 +9,6 @@ use df;
 use df\core;
 use df\apex;
 use df\axis;
-use df\opal;
 
 class Unit extends axis\unit\table\Base {
     
@@ -17,6 +16,12 @@ class Unit extends axis\unit\table\Base {
         'name' => 5,
         'description' => 1
     ];
+
+    protected $_defaultOrderableFields = [
+        'slug', 'name'
+    ];
+
+    protected $_defaultOrder = 'name ASC';
 
     protected function _onCreate(axis\schema\ISchema $schema) {
         $schema->addField('id', 'AutoId');
@@ -31,12 +36,5 @@ class Unit extends axis\unit\table\Base {
 
         $schema->addField('color', 'String', 7)
             ->isNullable(true);
-    }
-
-    public function applyPagination(opal\query\IPaginator $paginator) {
-        $paginator->setOrderableFields('slug', 'name')
-            ->setDefaultOrder('name ASC');
-            
-        return $this;
     }
 }

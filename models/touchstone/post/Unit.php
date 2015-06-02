@@ -13,6 +13,12 @@ use df\opal;
     
 class Unit extends axis\unit\table\Base {
 
+    protected $_defaultOrderableFields = [
+        'slug', 'owner', 'isPersonal', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive'
+    ];
+
+    protected $_defaultOrder = 'creationDate DESC';
+
     protected function _onCreate(axis\schema\ISchema $schema) {
         // Id
         $schema->addField('id', 'AutoId');
@@ -58,13 +64,6 @@ class Unit extends axis\unit\table\Base {
 
         // Is live
         $schema->addIndexedField('isLive', 'Boolean');
-    }
-
-    public function applyPagination(opal\query\IPaginator $paginator) {
-        $paginator->setOrderableFields('slug', 'owner', 'isPersonal', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive')
-            ->setDefaultOrder('creationDate DESC');
-            
-        return $this;
     }
 
 

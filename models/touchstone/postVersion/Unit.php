@@ -9,9 +9,14 @@ use df;
 use df\core;
 use df\apex;
 use df\axis;
-use df\opal;
     
 class Unit extends axis\unit\table\Base {
+
+    protected $_defaultOrderableFields = [
+        'title', 'owner', 'post', 'creationDate', 'lastEditDate', 'displayIntro'
+    ];
+
+    protected $_defaultOrder = 'creationDate DESC';
 
     protected function _onCreate(axis\schema\ISchema $schema) {
         // Id
@@ -47,12 +52,5 @@ class Unit extends axis\unit\table\Base {
 
         // Body
         $schema->addField('body', 'ContentSlot', 'Article');
-    }
-
-    public function applyPagination(opal\query\IPaginator $paginator) {
-        $paginator->setOrderableFields('title', 'owner', 'post', 'creationDate', 'lastEditDate', 'displayIntro')
-            ->setDefaultOrder('creationDate DESC');
-            
-        return $this;
     }
 }
