@@ -19,7 +19,7 @@ class TagSelector extends arch\form\template\SearchSelectorDelegate {
         return $this->data->touchstone->tag->select()
             ->countRelation('posts')
             ->where('id', 'in', $ids)
-            ->chain([$this, 'applyDependencies'])
+            ->chain([$this, 'applyFilters'])
             ->orderBy('name ASC');
     }
 
@@ -30,7 +30,7 @@ class TagSelector extends arch\form\template\SearchSelectorDelegate {
                 ->where('name', 'matches', $search)
                 ->orWhere('slug', 'matches', $search)
                 ->endClause()
-            ->chain([$this, 'applyDependencies'])
+            ->chain([$this, 'applyFilters'])
             ->toList('id');
     }
 
