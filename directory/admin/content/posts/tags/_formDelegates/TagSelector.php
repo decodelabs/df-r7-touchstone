@@ -13,25 +13,12 @@ use df\fire;
 use df\aura;
 use df\opal;
     
-class TagSelector extends arch\form\template\SearchSelectorDelegate {
+class TagSelector extends arch\form\template\SelectorDelegate {
 
-    protected function _fetchResultList(array $ids) {
-        return $this->data->touchstone->tag->select()
+    protected function _getBaseQuery($fields=null) {
+        return $this->data->touchstone->tag->select($fields)
             ->countRelation('posts')
-            ->where('id', 'in', $ids)
-            ->chain([$this, 'applyFilters'])
             ->orderBy('name ASC');
-    }
-
-    protected function _getSearchResultIdList($search, array $selected) {
-        return $this->data->touchstone->tag->select('id')
-            ->wherePrerequisite('id', '!in', $selected)
-            ->beginWhereClause()
-                ->where('name', 'matches', $search)
-                ->orWhere('slug', 'matches', $search)
-                ->endClause()
-            ->chain([$this, 'applyFilters'])
-            ->toList('id');
     }
 
     protected function _renderCollectionList($result) {
