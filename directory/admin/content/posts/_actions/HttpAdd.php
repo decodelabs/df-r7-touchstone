@@ -196,9 +196,7 @@ class HttpAdd extends arch\form\Action {
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'
             ]);
 
-
-
-        if($this->isValid()) {
+        return $this->complete(function() {
             if($this->_version->hasChanged()) {
                 if(!$this->_keepVersion) {
                     $this->_version->makeNew();
@@ -225,7 +223,6 @@ class HttpAdd extends arch\form\Action {
             $this->_version->save();
             
             $this->comms->flashSaveSuccess('post');
-            return $this->complete();
-        }
+        });
     }
 }

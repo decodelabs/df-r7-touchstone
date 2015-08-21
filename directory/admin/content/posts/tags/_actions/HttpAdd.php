@@ -54,11 +54,9 @@ class HttpAdd extends arch\form\Action {
             ->validate($this->values)
             ->applyTo($this->_tag);
 
-        if($this->isValid()) {
+        return $this->complete(function() {
             $this->_tag->save();
             $this->comms->flashSaveSuccess('tag');
-
-            return $this->complete();
-        }
+        });
     }
 }

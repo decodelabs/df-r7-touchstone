@@ -87,11 +87,9 @@ class HttpAdd extends arch\form\Action {
             ->validate($this->values)
             ->applyTo($this->_category);
 
-        if($this->isValid()) {
+        return $this->complete(function() {
             $this->_category->save();
             $this->comms->flashSaveSuccess('category');
-
-            return $this->complete();
-        }
+        });
     }
 }
