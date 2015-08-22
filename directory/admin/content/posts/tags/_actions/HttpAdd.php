@@ -14,11 +14,11 @@ class HttpAdd extends arch\form\Action {
     
     protected $_tag;
 
-    protected function _init() {
+    protected function init() {
         $this->_tag = $this->scaffold->newRecord();
     }
 
-    protected function _createUi() {
+    protected function createUi() {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Tag details'));
 
@@ -39,7 +39,7 @@ class HttpAdd extends arch\form\Action {
         $fs->addDefaultButtonGroup();
     }
 
-    protected function _onSaveEvent() {
+    protected function onSaveEvent() {
         $this->data->newValidator()
             
             // Name

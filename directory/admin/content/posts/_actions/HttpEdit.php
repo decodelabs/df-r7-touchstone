@@ -12,7 +12,7 @@ use df\arch;
     
 class HttpEdit extends HttpAdd {
 
-    protected function _init() {
+    protected function init() {
         $this->_post = $this->scaffold->getRecord();
 
         $versionId = null;
@@ -37,11 +37,11 @@ class HttpEdit extends HttpAdd {
         }
     }
 
-    protected function _getDataId() {
+    protected function getInstanceId() {
         return $this->_post['id'].':'.$this->_version['id'];
     }
 
-    protected function _setDefaultValues() {
+    protected function setDefaultValues() {
         $this->values->importFrom($this->_post, [
             'slug', 'archiveDate', 'isLive', 'isPersonal', 'allowComments'
         ]);

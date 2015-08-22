@@ -16,12 +16,12 @@ class HttpAdd extends arch\form\Action {
     protected $_version;
     protected $_keepVersion = false;
 
-    protected function _init() {
+    protected function init() {
         $this->_post = $this->scaffold->newRecord();
         $this->_version = $this->data->newRecord('axis://touchstone/PostVersion');
     }
 
-    protected function _setupDelegates() {
+    protected function loadDelegates() {
         $this->loadDelegate('category', './categories/CategorySelector')
             ->isForOne(true)
             ->isRequired(false)
@@ -46,7 +46,7 @@ class HttpAdd extends arch\form\Action {
             ->setSlotDefinition($this->_post->getBodySlotDefinition());
     }
 
-    protected function _setDefaultValues() {
+    protected function setDefaultValues() {
         $this->values->isLive = true;
         $this->values->displayIntro = true;
         $this->values->allowComments = true;
@@ -56,7 +56,7 @@ class HttpAdd extends arch\form\Action {
         }
     }
 
-    protected function _createUi() {
+    protected function createUi() {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Post details'));
 
@@ -142,7 +142,7 @@ class HttpAdd extends arch\form\Action {
         $form->addDefaultButtonGroup();
     }
 
-    protected function _onSaveEvent() {
+    protected function onSaveEvent() {
         $validator = $this->data->newValidator()
 
             // Title

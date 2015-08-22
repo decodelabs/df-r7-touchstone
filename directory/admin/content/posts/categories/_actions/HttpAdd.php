@@ -14,11 +14,11 @@ class HttpAdd extends arch\form\Action {
     
     protected $_category;
 
-    protected function _init() {
+    protected function init() {
         $this->_category = $this->scaffold->newRecord();
     }
 
-    protected function _setupDelegates() {
+    protected function loadDelegates() {
         $this->loadDelegate('image', '~admin/media/FileSelector')
             ->setAcceptTypes('image/*')
             ->setBucket('posts')
@@ -26,7 +26,7 @@ class HttpAdd extends arch\form\Action {
             ->isRequired(false);
     }
 
-    protected function _createUi() {
+    protected function createUi() {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Category details'));
 
@@ -62,7 +62,7 @@ class HttpAdd extends arch\form\Action {
         $fs->addDefaultButtonGroup();
     }
 
-    protected function _onSaveEvent() {
+    protected function onSaveEvent() {
         $this->data->newValidator()
 
             // Name

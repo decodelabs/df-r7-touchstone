@@ -14,7 +14,7 @@ class HttpActivateVersion extends arch\form\template\Confirm {
 
     protected $_version;
 
-    protected function _init() {
+    protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
             $this->request->query['version'],
@@ -22,17 +22,17 @@ class HttpActivateVersion extends arch\form\template\Confirm {
         );
     }    
 
-    protected function _getDataId() {
+    protected function getInstanceId() {
         return $this->_version['id'];
     }
 
-    protected function _getMainMessage($itemName) {
+    protected function getMainMessage() {
         return $this->_(
             'Are you sure you want to activate this version?'
         );  
     }
 
-    protected function _renderItemDetails($container) {
+    protected function createItemUi($container) {
         $container->addAttributeList($this->_version)
             // Title
             ->addField('title')
@@ -53,7 +53,7 @@ class HttpActivateVersion extends arch\form\template\Confirm {
             });
     }
 
-    protected function _apply() {
+    protected function apply() {
         $this->_version['post']->activeVersion = $this->_version;
         $this->_version['post']->save();
     }

@@ -14,7 +14,7 @@ class HttpDeleteVersion extends arch\form\template\Delete {
 
     protected $_version;
 
-    protected function _init() {
+    protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
             $this->request->query['version'],
@@ -22,11 +22,11 @@ class HttpDeleteVersion extends arch\form\template\Delete {
         );
     }    
 
-    protected function _getDataId() {
+    protected function getInstanceId() {
         return $this->_version['id'];
     }
 
-    protected function _onSessionReady() {
+    protected function initWithSession() {
         if($this->_version['id'] == $this->_version['post']['#activeVersion']) {
             $this->values->addError('active', $this->_(
                 'This version is currently active and cannot be deleted'
@@ -34,7 +34,7 @@ class HttpDeleteVersion extends arch\form\template\Delete {
         }
     }
 
-    protected function _renderItemDetails($container) {
+    protected function createItemUi($container) {
         $container->addAttributeList($this->_version)
             // Title
             ->addField('title')
@@ -57,7 +57,7 @@ class HttpDeleteVersion extends arch\form\template\Delete {
 
 
 
-    protected function _deleteItem() {
+    protected function apply() {
         $this->_version->delete();
     }
 }

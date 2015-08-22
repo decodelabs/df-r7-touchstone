@@ -12,15 +12,15 @@ use df\arch;
 
 class HttpEdit extends HttpAdd {
     
-    protected function _init() {
+    protected function init() {
         $this->_category = $this->scaffold->getRecord();
     }
 
-    protected function _getDataId() {
+    protected function getInstanceId() {
         return $this->_category['id'];
     }
 
-    protected function _setDefaultValues() {
+    protected function setDefaultValues() {
         $this->values->importFrom($this->_category, [
             'name', 'slug', 'color', 'description'
         ]);

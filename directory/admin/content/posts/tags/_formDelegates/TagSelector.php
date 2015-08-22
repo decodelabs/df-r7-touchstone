@@ -32,7 +32,7 @@ class TagSelector extends arch\form\template\SelectorDelegate {
         return $record['slug'];
     }
 
-    protected function _renderInlineDetails(aura\html\widget\FieldArea $fa) {
+    protected function createInlineDetailsUi(aura\html\widget\FieldArea $fa) {
         $fa->push(
             $this->html->textbox($this->fieldName('slug'), $this->values->slug)
                 ->setPlaceholder('Separate with commas: news, my stuff, etc')
@@ -48,10 +48,10 @@ class TagSelector extends arch\form\template\SelectorDelegate {
             $this->html('<br /><br />')
         );
 
-        return parent::_renderInlineDetails($fa);
+        return parent::createInlineDetailsUi($fa);
     }
 
-    protected function _onInsertEvent() {
+    protected function onInsertEvent() {
         foreach(explode(',', $this->values['slug']) as $slug) {
             $slug = trim($slug);
 
@@ -69,7 +69,7 @@ class TagSelector extends arch\form\template\SelectorDelegate {
 
     public function apply() {
         if($this->values->slug->hasValue()) {
-            $this->_onInsertEvent();
+            $this->onInsertEvent();
         }
 
         return parent::apply();
