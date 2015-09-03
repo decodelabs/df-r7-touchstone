@@ -72,6 +72,16 @@ class Unit extends axis\unit\table\Base {
         $query->leftJoinRelation('activeVersion', 'title');
     }
 
+    public function applyActiveVersionQueryBlock(opal\query\IReadQuery $query, $body=false) {
+        $fields = ['title', 'headerImage', 'intro', 'displayIntro'];
+
+        if($body) {
+            $fields[] = 'body';
+        }
+
+        $query->leftJoinRelation('activeVersion', $fields);
+    }
+
     public function applyTagSlugClauseQueryBlock(opal\query\IReadQuery $query, array $slugs) {
         $query
             ->whereCorrelation('id', 'in', 'post')
