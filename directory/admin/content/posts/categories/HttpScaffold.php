@@ -32,18 +32,10 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
 
 // Record data
-    protected function _prepareRecordListQuery(opal\query\ISelectQuery $query, $mode) {
+    protected function prepareRecordList($query, $mode) {
         $query
             ->countRelation('posts')
             ->importRelationBlock('image', 'link');
-    }
-
-    protected function _fetchSectionItemCounts() {
-        $category = $this->getRecord();
-
-        return [
-            'posts' => $category->posts->countAll()
-        ];
     }
 
 

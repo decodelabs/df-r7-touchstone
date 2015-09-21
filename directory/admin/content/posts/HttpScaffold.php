@@ -36,7 +36,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     ];
 
 // Record data
-    protected function _prepareRecordListQuery(opal\query\ISelectQuery $query, $mode) {
+    protected function prepareRecordList($query, $mode) {
         $query->countRelation('versions')
             ->importRelationBlock('category', 'link')
             ->importRelationBlock('tags', 'link')
@@ -46,7 +46,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
                 ->addOrderableFields('title');
     }
 
-    public function applyRecordQuerySearch(opal\query\ISelectQuery $query, $search, $mode) {
+    protected function searchRecordList($query, $search) {
         $query->searchFor($search, [
             'title' => 10,
             'activeVersion.intro' => 0.7,
@@ -54,16 +54,14 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
         ]);
     }
 
-    protected function _fetchSectionItemCounts() {
-        $post = $this->getRecord();
-
+    protected function countSectionItems($post) {
         return [
             'versions' => $post->versions->countAll(),
             'comments' => $this->data->interact->comment->countFor($post)
         ];
     }
 
-    protected function _getRecordName($record) {
+    protected function nameRecord($record) {
         if(isset($record['title'])) {
             return $record['title'];
         } else {
