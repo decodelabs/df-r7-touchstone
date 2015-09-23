@@ -57,7 +57,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
     protected function countSectionItems($post) {
         return [
             'versions' => $post->versions->countAll(),
-            'comments' => $this->data->interact->comment->countFor($post)
+            'comments' => $this->data->content->comment->countFor($post)
         ];
     }
 
