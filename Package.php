@@ -13,7 +13,6 @@ class Package extends core\Package {
 
     public static $dependencies = [
         'webCore',
-        'nightfireCore',
-        'interact'
+        'nightfireCore'
     ];
 }
