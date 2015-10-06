@@ -11,7 +11,7 @@ use df\apex;
 use df\axis;
 
 class Unit extends axis\unit\table\Base {
-    
+
     protected $_defaultSearchFields = [
         'name' => 5,
         'description' => 1
@@ -25,16 +25,16 @@ class Unit extends axis\unit\table\Base {
 
     protected function createSchema($schema) {
         $schema->addField('id', 'AutoId');
-        $schema->addField('name', 'String', 128);
+        $schema->addField('name', 'Text', 128);
         $schema->addField('slug', 'Slug');
 
-        $schema->addField('description', 'BigString');
+        $schema->addField('description', 'BigText');
         $schema->addField('posts', 'OneToMany', 'post', 'category');
 
         $schema->addField('image', 'One', 'media/file')
             ->isNullable(true);
 
-        $schema->addField('color', 'String', 7)
+        $schema->addField('color', 'Text', 7)
             ->isNullable(true);
     }
 }

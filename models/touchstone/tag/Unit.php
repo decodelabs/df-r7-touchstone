@@ -12,7 +12,7 @@ use df\axis;
 use df\opal;
 
 class Unit extends axis\unit\table\Base {
-    
+
     protected $_defaultOrderableFields = [
         'slug', 'name'
     ];
@@ -22,7 +22,7 @@ class Unit extends axis\unit\table\Base {
     protected function createSchema($schema) {
         $schema->addField('id', 'AutoId');
         $schema->addField('slug', 'Slug');
-        $schema->addField('name', 'String', 128);
+        $schema->addField('name', 'Text', 128);
         $schema->addField('posts', 'ManyToMany', 'post', 'tags');
     }
 
