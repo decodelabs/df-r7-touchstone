@@ -28,7 +28,7 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('name', 'Text', 128);
         $schema->addField('slug', 'Slug');
 
-        $schema->addField('description', 'BigText');
+        $schema->addField('description', 'Text');
         $schema->addField('posts', 'OneToMany', 'post', 'category');
 
         $schema->addField('image', 'One', 'media/file')
