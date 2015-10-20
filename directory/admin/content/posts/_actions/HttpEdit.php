@@ -17,11 +17,11 @@ class HttpEdit extends HttpAdd {
 
         $versionId = null;
 
-        if(isset($this->request->query->version)) {
+        if(isset($this->request['version'])) {
             $this->_keepVersion = true;
-            $versionId = $this->request->query['version'];
-        } else if(isset($this->request->query->rebase)) {
-            $versionId = $this->request->query['rebase'];
+            $versionId = $this->request['version'];
+        } else if(isset($this->request['rebase'])) {
+            $versionId = $this->request['rebase'];
         }
 
         if($versionId) {

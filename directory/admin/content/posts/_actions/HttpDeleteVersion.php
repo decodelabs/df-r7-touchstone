@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -9,7 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\arch;
-    
+
 class HttpDeleteVersion extends arch\form\template\Delete {
 
     protected $_version;
@@ -17,10 +17,10 @@ class HttpDeleteVersion extends arch\form\template\Delete {
     protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
-            $this->request->query['version'],
+            $this->request['version'],
             'edit'
         );
-    }    
+    }
 
     protected function getInstanceId() {
         return $this->_version['id'];

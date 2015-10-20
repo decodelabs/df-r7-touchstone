@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -9,7 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\arch;
-    
+
 class HttpActivateVersion extends arch\form\template\Confirm {
 
     protected $_version;
@@ -17,10 +17,10 @@ class HttpActivateVersion extends arch\form\template\Confirm {
     protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
-            $this->request->query['version'],
+            $this->request['version'],
             'edit'
         );
-    }    
+    }
 
     protected function getInstanceId() {
         return $this->_version['id'];
@@ -29,7 +29,7 @@ class HttpActivateVersion extends arch\form\template\Confirm {
     protected function getMainMessage() {
         return $this->_(
             'Are you sure you want to activate this version?'
-        );  
+        );
     }
 
     protected function createItemUi($container) {
