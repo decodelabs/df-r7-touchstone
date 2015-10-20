@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -9,7 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\arch;
-    
+
 class HttpAdd extends arch\form\Action {
 
     protected $_post;
@@ -50,10 +50,6 @@ class HttpAdd extends arch\form\Action {
         $this->values->isLive = true;
         $this->values->displayIntro = true;
         $this->values->allowComments = true;
-
-        if(isset($this->request->query->category)) {
-            $this->getDelegate('category')->setSelected($this->request->query['category']);
-        }
     }
 
     protected function createUi() {
@@ -221,7 +217,7 @@ class HttpAdd extends arch\form\Action {
 
             $this->_post->save();
             $this->_version->save();
-            
+
             $this->comms->flashSaveSuccess('post');
         });
     }
