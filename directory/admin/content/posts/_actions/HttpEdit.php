@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -9,7 +9,7 @@ use df;
 use df\core;
 use df\apex;
 use df\arch;
-    
+
 class HttpEdit extends HttpAdd {
 
     protected function init() {
@@ -50,11 +50,11 @@ class HttpEdit extends HttpAdd {
             'title', 'displayIntro'
         ]);
 
-        $this->getDelegate('category')->setSelected($this->_post['#category']);
-        $this->getDelegate('tags')->setSelected($this->_post['#tags']);
+        $this['category']->setSelected($this->_post['#category']);
+        $this['tags']->setSelected($this->_post['#tags']);
 
-        $this->getDelegate('headerImage')->setSelected($this->_version['#headerImage']);
-        $this->getDelegate('intro')->setBlock($this->_version['intro']);
-        $this->getDelegate('body')->setSlotContent($this->_version['body']);
+        $this['headerImage']->setSelected($this->_version['#headerImage']);
+        $this['intro']->setBlock($this->_version['intro']);
+        $this['body']->setSlotContent($this->_version['body']);
     }
 }

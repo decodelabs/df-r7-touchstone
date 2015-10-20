@@ -11,7 +11,7 @@ use df\apex;
 use df\arch;
 
 class HttpAdd extends arch\form\Action {
-    
+
     protected $_category;
 
     protected function init() {
@@ -49,9 +49,7 @@ class HttpAdd extends arch\form\Action {
         );
 
         // Image
-        $fs->addFieldArea($this->_('Image'))->push(
-            $this->getDelegate('image')
-        );
+        $fs->addFieldArea($this->_('Image'))->push($this['image']);
 
         // Description
         $fs->addFieldArea($this->_('Description'))->push(

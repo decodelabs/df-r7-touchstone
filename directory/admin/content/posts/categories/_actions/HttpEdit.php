@@ -11,7 +11,7 @@ use df\apex;
 use df\arch;
 
 class HttpEdit extends HttpAdd {
-    
+
     protected function init() {
         $this->_category = $this->scaffold->getRecord();
     }
@@ -25,6 +25,6 @@ class HttpEdit extends HttpAdd {
             'name', 'slug', 'color', 'description'
         ]);
 
-        $this->getDelegate('image')->setSelected($this->_category['#image']);
+        $this['image']->setSelected($this->_category['#image']);
     }
 }
