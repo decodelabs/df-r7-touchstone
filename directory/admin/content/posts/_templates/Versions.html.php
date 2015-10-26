@@ -1,7 +1,7 @@
 <?php
 
-echo $this->html->collectionList($this['versionList'])
-    
+echo $this->html->collectionList($versionList)
+
     // Title
     ->addField('title')
 
@@ -21,10 +21,10 @@ echo $this->html->collectionList($this['versionList'])
     })
 
     // Actions
-    ->addField('actions', function($version, $context) {
+    ->addField('actions', function($version, $context) use($post) {
         $isActive = false;
 
-        if($version['id'] == $this['post']['#activeVersion']) {
+        if($version['id'] == $post['#activeVersion']) {
             $isActive = true;
             $context->getRowTag()->addClass('active');
         }
@@ -38,13 +38,13 @@ echo $this->html->collectionList($this['versionList'])
                 ->isDisabled($isActive),
 
             $this->html->link(
-                    $this->uri('./edit?post='.$this['post']['id'].'&rebase='.$version['id'], true),
+                    $this->uri('./edit?post='.$post['id'].'&rebase='.$version['id'], true),
                     $this->_('Rebase')
                 )
                 ->setIcon('add'),
 
             $this->html->link(
-                    $this->uri('./edit?post='.$this['post']['id'].'&version='.$version['id'], true),
+                    $this->uri('./edit?post='.$post['id'].'&version='.$version['id'], true),
                     $this->_('Edit')
                 )
                 ->setIcon('edit'),
