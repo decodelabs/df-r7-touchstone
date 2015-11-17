@@ -12,7 +12,7 @@ use df\arch;
 use df\opal;
 
 class HttpScaffold extends arch\scaffold\template\RecordAdmin {
-    
+
     const DIRECTORY_TITLE = 'Posts';
     const DIRECTORY_ICON = 'post';
     const RECORD_ADAPTER = 'axis://touchstone/Post';
@@ -79,26 +79,22 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             $this->html->link('./tags/', $this->_('Tags'))
                 ->setIcon('tag')
                 ->setDisposition('transitive')
-        );  
+        );
     }
 
 
 // Sections
     public function renderCommentsSectionBody($post) {
-        $output = [];
-
         if(!$post['allowComments']) {
-            $output[] = $this->html->flashMessage($this->_(
+            yield $this->html->flashMessage($this->_(
                 'Comments are currently disabled for this post'
             ), 'warning');
         }
 
-        $output[] = $this->apex->component('~/comments/Comment', $post->getEntityLocator())
+        yield $this->apex->component('~/comments/Comment', $post->getEntityLocator())
             ->shouldDisplayAsTree(true)
             ->shouldShowForm($post['allowComments'])
             ->shouldShowInactive(true);
-
-        return $output;
     }
 
     public function renderVersionsSectionBody($post) {
