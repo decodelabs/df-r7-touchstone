@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ use df\arch;
 use df\fire;
 use df\aura;
 use df\opal;
-    
+
 class TagSelector extends arch\form\template\SelectorDelegate {
 
     protected function _getBaseQuery($fields=null) {
@@ -32,7 +32,7 @@ class TagSelector extends arch\form\template\SelectorDelegate {
         return $record['slug'];
     }
 
-    protected function createInlineDetailsUi(aura\html\widget\FieldArea $fa) {
+    protected function createInlineDetailsUi(aura\html\widget\Field $fa) {
         $fa->push(
             $this->html->textbox($this->fieldName('slug'), $this->values->slug)
                 ->setPlaceholder('Separate with commas: news, my stuff, etc')

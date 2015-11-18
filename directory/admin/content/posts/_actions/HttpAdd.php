@@ -57,38 +57,38 @@ class HttpAdd extends arch\form\Action {
         $fs = $form->addFieldSet($this->_('Post details'));
 
         // Title
-        $fs->addFieldArea($this->_('Title'))->push(
+        $fs->addField($this->_('Title'))->push(
             $this->html->textbox('title', $this->values->title)
                 ->isRequired(true)
         );
 
         // Slug
-        $fs->addFieldArea($this->_('Slug'))->push(
+        $fs->addField($this->_('Slug'))->push(
             $this->html->textbox('slug', $this->values->slug)
                 ->setPlaceholder($this->_('Auto-generate from title'))
         );
 
         // Archive date
-        $fs->addFieldArea($this->_('Archive after'))->push(
+        $fs->addField($this->_('Archive after'))->push(
             $this->html->datePicker('archiveDate', $this->values->archiveDate)
         );
 
         // Is live
-        $fs->addFieldArea()->push(
+        $fs->addField()->push(
             $this->html->checkbox('isLive', $this->values->isLive, $this->_(
                 'This post should be live and accessible from the front end'
             ))
         );
 
         // Is personal
-        $fs->addFieldArea()->push(
+        $fs->addField()->push(
             $this->html->checkbox('isPersonal', $this->values->isPersonal, $this->_(
                 'This post should only be displayed in the owner\'s own personal list'
             ))
         );
 
         // Allow comments
-        $fs->addFieldArea()->push(
+        $fs->addField()->push(
             $this->html->checkbox('allowComments', $this->values->allowComments, $this->_(
                 'Allow comments on this post'
             ))
@@ -99,22 +99,22 @@ class HttpAdd extends arch\form\Action {
 
 
         // Category
-        $fs->addFieldArea($this->_('Category'))->push($this['category']);
+        $fs->addField($this->_('Category'))->push($this['category']);
 
         // Tags
-        $fs->addFieldArea($this->_('Tags'))->push($this['tags']);
+        $fs->addField($this->_('Tags'))->push($this['tags']);
 
 
         $fs = $form->addFieldSet($this->_('Intro'));
 
         // Image
-        $fs->addFieldArea($this->_('Header image'))->push($this['headerImage']);
+        $fs->addField($this->_('Header image'))->push($this['headerImage']);
 
         // Intro
-        $fs->addFieldArea($this->_('Intro'))->push($this['intro']);
+        $fs->addField($this->_('Intro'))->push($this['intro']);
 
         // Display intro
-        $fs->addFieldArea()->push(
+        $fs->addField()->push(
             $this->html->checkbox('displayIntro', $this->values->displayIntro, $this->_(
                 'Display the intro as part of the full body content'
             ))

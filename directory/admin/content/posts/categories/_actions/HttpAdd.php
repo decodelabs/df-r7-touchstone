@@ -31,28 +31,28 @@ class HttpAdd extends arch\form\Action {
         $fs = $form->addFieldSet($this->_('Category details'));
 
         // Name
-        $fs->addFieldArea($this->_('Name'))->push(
+        $fs->addField($this->_('Name'))->push(
             $this->html->textbox('name', $this->values->name)
                 ->setMaxLength(128)
                 ->isRequired(true)
         );
 
         // Slug
-        $fs->addFieldArea($this->_('Slug'))->push(
+        $fs->addField($this->_('Slug'))->push(
             $this->html->textbox('slug', $this->values->slug)
                 ->setPlaceholder($this->_('Auto-generate from name'))
         );
 
         // Color
-        $fs->addFieldArea($this->_('Color'))->push(
+        $fs->addField($this->_('Color'))->push(
             $this->html->colorPicker('color', $this->values->color)
         );
 
         // Image
-        $fs->addFieldArea($this->_('Image'))->push($this['image']);
+        $fs->addField($this->_('Image'))->push($this['image']);
 
         // Description
-        $fs->addFieldArea($this->_('Description'))->push(
+        $fs->addField($this->_('Description'))->push(
             $this->html->textarea('description', $this->values->description)
         );
 

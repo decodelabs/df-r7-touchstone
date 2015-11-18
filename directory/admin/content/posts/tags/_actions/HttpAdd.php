@@ -11,7 +11,7 @@ use df\apex;
 use df\arch;
 
 class HttpAdd extends arch\form\Action {
-    
+
     protected $_tag;
 
     protected function init() {
@@ -23,14 +23,14 @@ class HttpAdd extends arch\form\Action {
         $fs = $form->addFieldSet($this->_('Tag details'));
 
         // Name
-        $fs->addFieldArea($this->_('Name'))->push(
+        $fs->addField($this->_('Name'))->push(
             $this->html->textbox('name', $this->values->name)
                 ->setMaxLength(128)
                 ->isRequired(true)
         );
 
         // Slug
-        $fs->addFieldArea($this->_('Slug'))->push(
+        $fs->addField($this->_('Slug'))->push(
             $this->html->textbox('slug', $this->values->slug)
                 ->setPlaceholder($this->_('Auto-generate from name'))
         );
@@ -41,7 +41,7 @@ class HttpAdd extends arch\form\Action {
 
     protected function onSaveEvent() {
         $this->data->newValidator()
-            
+
             // Name
             ->addRequiredField('name', 'text')
                 ->setMaxLength(128)
