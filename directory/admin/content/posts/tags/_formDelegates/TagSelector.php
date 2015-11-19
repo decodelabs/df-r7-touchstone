@@ -13,7 +13,7 @@ use df\fire;
 use df\aura;
 use df\opal;
 
-class TagSelector extends arch\form\template\SelectorDelegate {
+class TagSelector extends arch\action\form\SelectorDelegate {
 
     protected function _getBaseQuery($fields=null) {
         return $this->data->touchstone->tag->select($fields)

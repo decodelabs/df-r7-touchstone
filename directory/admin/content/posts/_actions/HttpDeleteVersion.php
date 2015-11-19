@@ -10,7 +10,7 @@ use df\core;
 use df\apex;
 use df\arch;
 
-class HttpDeleteVersion extends arch\form\template\Delete {
+class HttpDeleteVersion extends arch\action\DeleteForm {
 
     protected $_version;
 

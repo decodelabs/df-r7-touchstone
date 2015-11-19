@@ -10,7 +10,7 @@ use df\core;
 use df\apex;
 use df\arch;
 
-class HttpActivateVersion extends arch\form\template\Confirm {
+class HttpActivateVersion extends arch\action\ConfirmForm {
 
     protected $_version;
 
