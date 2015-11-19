@@ -11,8 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
-class HttpScaffold extends arch\scaffold\template\RecordAdmin {
-    
+class HttpScaffold extends arch\scaffold\RecordAdmin {
+
     const DIRECTORY_TITLE = 'Tags';
     const DIRECTORY_ICON = 'tag';
     const RECORD_ADAPTER = 'axis://touchstone/Tag';
@@ -48,6 +48,6 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             $this->html->link('../categories/', $this->_('Categories'))
                 ->setIcon('category')
                 ->setDisposition('transitive')
-        );  
+        );
     }
 }

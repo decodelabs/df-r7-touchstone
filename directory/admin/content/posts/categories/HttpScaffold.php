@@ -11,8 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
-class HttpScaffold extends arch\scaffold\template\RecordAdmin {
-    
+class HttpScaffold extends arch\scaffold\RecordAdmin {
+
     const DIRECTORY_TITLE = 'Categories';
     const DIRECTORY_ICON = 'category';
     const RECORD_ADAPTER = 'axis://touchstone/Category';
@@ -55,7 +55,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
 
         $menu->addLinks(
             $this->html->link(
-                    $this->uri('../add?category='.$category['id'], true), 
+                    $this->uri('../add?category='.$category['id'], true),
                     $this->_('Add post')
                 )
                 ->setIcon('add')
@@ -67,7 +67,7 @@ class HttpScaffold extends arch\scaffold\template\RecordAdmin {
             $this->html->link('../tags/', $this->_('Tags'))
                 ->setIcon('tag')
                 ->setDisposition('transitive')
-        );  
+        );
     }
 
 
