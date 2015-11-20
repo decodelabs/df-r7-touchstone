@@ -3,14 +3,14 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\content\posts\_actions;
+namespace df\apex\directory\admin\content\posts\_nodes;
 
 use df;
 use df\core;
 use df\apex;
 use df\arch;
 
-class HttpDeleteVersion extends arch\action\DeleteForm {
+class HttpActivateVersion extends arch\node\ConfirmForm {
 
     protected $_version;
 
@@ -26,12 +26,10 @@ class HttpDeleteVersion extends arch\action\DeleteForm {
         return $this->_version['id'];
     }
 
-    protected function initWithSession() {
-        if($this->_version['id'] == $this->_version['post']['#activeVersion']) {
-            $this->values->addError('active', $this->_(
-                'This version is currently active and cannot be deleted'
-            ));
-        }
+    protected function getMainMessage() {
+        return $this->_(
+            'Are you sure you want to activate this version?'
+        );
     }
 
     protected function createItemUi($container) {
@@ -55,9 +53,8 @@ class HttpDeleteVersion extends arch\action\DeleteForm {
             });
     }
 
-
-
     protected function apply() {
-        $this->_version->delete();
+        $this->_version['post']->activeVersion = $this->_version;
+        $this->_version['post']->save();
     }
 }

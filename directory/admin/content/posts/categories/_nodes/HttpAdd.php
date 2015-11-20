@@ -3,14 +3,14 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\content\posts\categories\_actions;
+namespace df\apex\directory\admin\content\posts\categories\_nodes;
 
 use df;
 use df\core;
 use df\apex;
 use df\arch;
 
-class HttpAdd extends arch\action\Form {
+class HttpAdd extends arch\node\Form {
 
     protected $_category;
 

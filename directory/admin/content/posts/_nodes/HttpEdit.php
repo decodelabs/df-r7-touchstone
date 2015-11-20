@@ -3,7 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\apex\directory\admin\content\posts\_actions;
+namespace df\apex\directory\admin\content\posts\_nodes;
 
 use df;
 use df\core;
