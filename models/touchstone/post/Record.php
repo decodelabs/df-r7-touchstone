@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -10,16 +10,16 @@ use df\core;
 use df\apex;
 use df\opal;
 use df\axis;
-    
+
 class Record extends opal\record\Base {
-    
+
     const BROADCAST_HOOK_EVENTS = true;
-    
+
     protected function _onPreDelete($taskSet, $task) {
         $id = $this['id'];
 
-        $delTask = $taskSet->addRawQuery('deleteVersions', 
-            $this->getRecordAdapter()->getModel()->postVersion->delete()
+        $delTask = $taskSet->addRawQuery('deleteVersions',
+            $this->getAdapter()->getModel()->postVersion->delete()
                 ->where('post', '=', $this)
         );
 
@@ -27,7 +27,7 @@ class Record extends opal\record\Base {
     }
 
     public function getBodySlotDefinition() {
-        return $this->getRecordAdapter()
+        return $this->getAdapter()
             ->getModel()
             ->getUnit('postVersion')
             ->getUnitSchema()
