@@ -13,9 +13,9 @@ use df\opal;
 
 class HttpScaffold extends arch\scaffold\RecordAdmin {
 
-    const DIRECTORY_TITLE = 'Categories';
-    const DIRECTORY_ICON = 'category';
-    const RECORD_ADAPTER = 'axis://touchstone/Category';
+    const TITLE = 'Categories';
+    const ICON = 'category';
+    const ADAPTER = 'axis://touchstone/Category';
 
     protected $_sections = [
         'details',
