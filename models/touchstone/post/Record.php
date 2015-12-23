@@ -15,7 +15,7 @@ class Record extends opal\record\Base {
 
     const BROADCAST_HOOK_EVENTS = true;
 
-    protected function _onPreDelete($taskSet, $task) {
+    protected function onPreDelete($taskSet, $task) {
         $id = $this['id'];
 
         $delTask = $taskSet->addRawQuery('deleteVersions',
