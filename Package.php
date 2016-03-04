@@ -8,10 +8,7 @@ namespace df\apex\packages\touchstone;
 use df\core;
 
 class Package extends core\Package {
-    
-    const PRIORITY = 20;
 
-    public static $dependencies = [
-        'webCore'
-    ];
+    const PRIORITY = 20;
+    const DEPENDENCIES = ['webCore'];
 }
