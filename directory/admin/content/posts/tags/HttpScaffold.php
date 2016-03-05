@@ -18,12 +18,12 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     const ADAPTER = 'axis://touchstone/Tag';
     const NAME_FIELD = 'slug';
 
-    protected $_sections = [
+    const SECTIONS = [
         'details',
         'posts' => 'post'
     ];
 
-    protected $_recordListFields = [
+    const LIST_FIELDS = [
         'slug', 'name', 'posts'
     ];
 

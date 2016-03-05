@@ -17,16 +17,16 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     const ICON = 'category';
     const ADAPTER = 'axis://touchstone/Category';
 
-    protected $_sections = [
+    const SECTIONS = [
         'details',
         'posts' => 'post'
     ];
 
-    protected $_recordListFields = [
+    const LIST_FIELDS = [
         'name', 'posts', 'image', 'color'
     ];
 
-    protected $_recordDetailsFields = [
+    const DETAILS_FIELDS = [
         'name', 'slug', 'image', 'color', 'description'
     ];
 
