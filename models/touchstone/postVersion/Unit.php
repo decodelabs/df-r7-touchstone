@@ -12,11 +12,11 @@ use df\axis;
 
 class Unit extends axis\unit\table\Base {
 
-    protected $_defaultOrderableFields = [
+    const ORDERABLE_FIELDS = [
         'title', 'owner', 'post', 'creationDate', 'lastEditDate', 'displayIntro'
     ];
 
-    protected $_defaultOrder = 'creationDate DESC';
+    const DEFAULT_ORDER = 'creationDate DESC';
 
     protected function createSchema($schema) {
         // Id

@@ -13,11 +13,11 @@ use df\opal;
 
 class Unit extends axis\unit\table\Base {
 
-    protected $_defaultOrderableFields = [
+    const ORDERABLE_FIELDS = [
         'slug', 'name'
     ];
 
-    protected $_defaultOrder = 'name ASC';
+    const DEFAULT_ORDER = 'name ASC';
 
     protected function createSchema($schema) {
         $schema->addField('id', 'AutoId');

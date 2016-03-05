@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
@@ -10,14 +10,14 @@ use df\core;
 use df\apex;
 use df\axis;
 use df\opal;
-    
+
 class Unit extends axis\unit\table\Base {
 
-    protected $_defaultOrderableFields = [
+    const ORDERABLE_FIELDS = [
         'slug', 'owner', 'isPersonal', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive'
     ];
 
-    protected $_defaultOrder = 'creationDate DESC';
+    const DEFAULT_ORDER = 'creationDate DESC';
 
     protected function createSchema($schema) {
         // Id
