@@ -15,15 +15,11 @@ class Record extends opal\record\Base {
 
     const BROADCAST_HOOK_EVENTS = true;
 
-    protected function onPreDelete($taskSet, $task) {
-        $id = $this['id'];
-
-        $delTask = $taskSet->addRawQuery('deleteVersions',
+    protected function onPreDelete($queue, $job) {
+        $job->addDependency($queue->asap('deleteVersions',
             $this->getAdapter()->getModel()->postVersion->delete()
                 ->where('post', '=', $this)
-        );
-
-        $task->addDependency($delTask);
+        ));
     }
 
     public function getBodySlotDefinition() {
