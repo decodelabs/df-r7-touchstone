@@ -30,7 +30,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     ];
 
     const DETAILS_FIELDS = [
-        'title', 'slug', 'owner', 'isPersonal', 'isLive', 'category', 'tags',
+        'title', 'slug', 'owner', 'isLive', 'category', 'tags',
         'versions', 'creationDate', 'lastEditDate', 'archiveDate',
         'headerImage', 'intro', 'body'
     ];
@@ -118,12 +118,6 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
             }
 
             return $post['activeVersion']['title'];
-        });
-    }
-
-    public function defineIsPersonalField($list, $mode) {
-        $list->addField('isPersonal', function($post) {
-            return $this->html->booleanIcon($post['isPersonal']);
         });
     }
 

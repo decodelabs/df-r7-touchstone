@@ -19,38 +19,25 @@ class Unit extends axis\unit\table\Base {
     const DEFAULT_ORDER = 'creationDate DESC';
 
     protected function createSchema($schema) {
-        // Id
         $schema->addField('id', 'AutoId');
 
-        // Post
+        $schema->addField('title', 'Text', 128);
         $schema->addField('post', 'ManyToOne', 'touchstone/post', 'versions');
 
-        // Created
         $schema->addIndexedField('creationDate', 'Timestamp');
-
-        // Last edited
         $schema->addField('lastEditDate', 'Timestamp')
             ->shouldTimestampAsDefault(false)
             ->isNullable(true);
 
-        // Owner
         $schema->addField('owner', 'One', 'user/client');
 
-        // Title
-        $schema->addField('title', 'Text', 128);
-
-        // Image
         $schema->addField('headerImage', 'One', 'media/file')
             ->isNullable(true);
 
-        // Intro
         $schema->addField('intro', 'ContentBlock', 'Description');
-
-        // Display intro
         $schema->addField('displayIntro', 'Boolean')
             ->setDefaultValue(true);
 
-        // Body
         $schema->addField('body', 'ContentSlot', 'Article');
     }
 }

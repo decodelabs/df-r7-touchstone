@@ -14,55 +14,35 @@ use df\opal;
 class Unit extends axis\unit\table\Base {
 
     const ORDERABLE_FIELDS = [
-        'slug', 'owner', 'isPersonal', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive'
+        'slug', 'owner', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive'
     ];
 
     const DEFAULT_ORDER = 'creationDate DESC';
 
     protected function createSchema($schema) {
-        // Id
         $schema->addField('id', 'AutoId');
-
-        // Slug
         $schema->addField('slug', 'Slug');
 
-        // Category
         $schema->addField('category', 'ManyToOne', 'category', 'posts')
             ->isNullable(true);
-
-        // Tags
         $schema->addField('tags', 'ManyToMany', 'tag', 'posts')
             ->isDominant(true);
 
-        // Created
         $schema->addIndexedField('creationDate', 'Timestamp');
-
-        // Last edited
         $schema->addField('lastEditDate', 'Timestamp')
             ->shouldTimestampAsDefault(false)
             ->isNullable(true);
-
-        // Archive date
         $schema->addField('archiveDate', 'Date')
             ->isNullable(true);
 
-        // Owner
         $schema->addField('owner', 'One', 'user/client');
 
-        // Is personal
-        $schema->addField('isPersonal', 'Boolean');
-
-        // Versions
         $schema->addField('versions', 'OneToMany', 'touchstone/postVersion', 'post');
-
-        // Active version
         $schema->addField('activeVersion', 'One', 'touchstone/postVersion');
 
-        // Comments
         $schema->addField('allowComments', 'Boolean')
             ->setDefaultValue(true);
 
-        // Is live
         $schema->addIndexedField('isLive', 'Boolean');
     }
 

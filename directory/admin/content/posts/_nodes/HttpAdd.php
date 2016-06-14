@@ -80,13 +80,6 @@ class HttpAdd extends arch\node\Form {
             ))
         );
 
-        // Is personal
-        $fs->addField()->push(
-            $this->html->checkbox('isPersonal', $this->values->isPersonal, $this->_(
-                'This post should only be displayed in the owner\'s own personal list'
-            ))
-        );
-
         // Allow comments
         $fs->addField()->push(
             $this->html->checkbox('allowComments', $this->values->allowComments, $this->_(
@@ -165,9 +158,6 @@ class HttpAdd extends arch\node\Form {
             // Is live
             ->addField('isLive', 'boolean')
 
-            // Is personal
-            ->addField('isPersonal', 'boolean')
-
             // Allow comments
             ->addField('allowComments', 'boolean')
 
@@ -176,7 +166,7 @@ class HttpAdd extends arch\node\Form {
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'category', 'tags', 'isLive', 'isPersonal', 'allowComments'
+                'slug', 'archiveDate', 'category', 'tags', 'isLive', 'allowComments'
             ])
             ->applyTo($this->_version, [
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'
