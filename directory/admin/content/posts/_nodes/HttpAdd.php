@@ -156,13 +156,13 @@ class HttpAdd extends arch\node\Form {
             ->addField('archiveDate', 'Date')
 
             // Is live
-            ->addField('isLive', 'boolean')
+            ->addRequiredField('isLive', 'boolean')
 
             // Allow comments
-            ->addField('allowComments', 'boolean')
+            ->addRequiredField('allowComments', 'boolean')
 
             // Display intro
-            ->addField('displayIntro', 'boolean')
+            ->addRequiredField('displayIntro', 'boolean')
 
             ->validate($this->values)
             ->applyTo($this->_post, [
