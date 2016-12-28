@@ -17,8 +17,7 @@ class HttpActivateVersion extends arch\node\ConfirmForm {
     protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
-            $this->request['version'],
-            'edit'
+            $this->request['version']
         );
     }
 

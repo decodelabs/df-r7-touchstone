@@ -17,8 +17,7 @@ class HttpDeleteVersion extends arch\node\DeleteForm {
     protected function init() {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
-            $this->request['version'],
-            'edit'
+            $this->request['version']
         );
     }
 
