@@ -91,6 +91,28 @@ class Unit extends axis\unit\table\Base {
             ->orderBy('creationDate DESC');
     }
 
+    public function selectForReading(?string $slug) {
+        return $this->context->data->selectForAction(
+            $this, ['*'],
+            ['slug' => $slug],
+            function($query) {
+                $query
+                    ->joinRelation('activeVersion', 'title', 'intro', 'displayIntro', 'body')
+                    ->importRelationBlock('activeVersion.headerImage', 'link')
+                    ->importRelationBlock('owner', 'link')
+                    ->importRelationBlock('category', 'link', ['slug', 'color'])
+                    ->selectAttachRelation('tags', 'slug', 'name')
+                        ->orderBy('name ASC')
+                        ->asList('tags', 'slug', 'name')
+
+                    ->chainIf(!$this->context->user->isA('admin', 'developer'), function($query) {
+                        $query->where('isLive', '=', true);
+                    })
+                    ;
+            }
+        );
+    }
+
 
 // Query blocks
     public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
