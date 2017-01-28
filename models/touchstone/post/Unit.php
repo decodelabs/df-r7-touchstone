@@ -47,6 +47,51 @@ class Unit extends axis\unit\table\Base {
     }
 
 
+    public function selectForIndex(string $categorySlug=null, ?string ...$tagSlugs) {
+        if(empty($tagSlugs[0] ?? null)) {
+            unset($tagSlugs[0]);
+        }
+
+        return $this->select('id', 'slug', 'creationDate')
+            ->joinRelation('activeVersion', 'title', 'intro', 'displayIntro', 'body')
+            ->importRelationBlock('activeVersion.headerImage', 'link')
+            ->importRelationBlock('owner', 'link')
+            ->selectAttachRelation('tags', 'id', 'slug', 'name')
+                ->orderBy('name ASC')
+                ->asMany('tags')
+
+            ->chainIf(!empty($categorySlug), function($query) use($categorySlug) {
+                $query->whereCorrelation('category', 'in', 'id')
+                    ->from('axis://touchstone/Category', 'category')
+                    ->where('category.slug', '=', $categorySlug)
+                    ->endCorrelation();
+            })
+
+            ->chainIf(!empty($tagSlugs), function($query) use($tagSlugs) {
+                $query->whereCorrelation('id', 'in', 'post')
+                    ->from($this->getBridgeUnit('tags'), 'bridge')
+                    ->whereCorrelation('bridge.tag', 'in', 'id')
+                        ->from('axis://touchstone/Tag', 'tag')
+                        ->where('tag.slug', 'in', $tagSlugs)
+                        ->endCorrelation()
+                    ->endCorrelation();
+            })
+
+            ->where('isLive', '=', true)
+            ;
+    }
+
+    public function selectForCategoryList(string ...$categories) {
+        return $this->select('slug')
+            ->joinRelation('activeVersion', 'title')
+            ->whereCorrelation('category', 'in', 'id')
+                ->from('axis://touchstone/Category')
+                ->where('slug', 'in', $categories)
+                ->endCorrelation()
+            ->orderBy('creationDate DESC');
+    }
+
+
 // Query blocks
     public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
         $query->leftJoinRelation('activeVersion', 'title');
