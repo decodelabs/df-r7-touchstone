@@ -29,6 +29,7 @@ class Unit extends axis\unit\table\Base {
             ->isDominant(true);
 
         $schema->addIndexedField('creationDate', 'Timestamp');
+        $schema->addField('postDate', 'Date');
         $schema->addField('lastEditDate', 'Timestamp')
             ->shouldTimestampAsDefault(false)
             ->isNullable(true);
