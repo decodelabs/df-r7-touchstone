@@ -53,7 +53,7 @@ class Unit extends axis\unit\table\Base {
             unset($tagSlugs[0]);
         }
 
-        return $this->select('id', 'slug', 'creationDate')
+        return $this->select('id', 'slug', 'creationDate', 'postDate')
             ->joinRelation('activeVersion', 'title', 'intro', 'displayIntro', 'body')
             ->importRelationBlock('activeVersion.headerImage', 'link')
             ->importRelationBlock('owner', 'link')
@@ -89,7 +89,7 @@ class Unit extends axis\unit\table\Base {
                 ->from('axis://touchstone/Category')
                 ->where('slug', 'in', $categories)
                 ->endCorrelation()
-            ->orderBy('creationDate DESC');
+            ->orderBy('postDate DESC', 'creationDate DESC');
     }
 
     public function selectForReading(?string $slug) {
