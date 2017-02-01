@@ -68,6 +68,13 @@ class HttpAdd extends arch\node\Form {
                 ->setPlaceholder($this->_('Auto-generate from title'))
         );
 
+        // Post date
+        $fs->addField($this->_('Post date'))->setDescription($this->_(
+            'Leave empty to default to today'
+        ))->push(
+            $this->html->datePicker('postDate', $this->values->postDate)
+        );
+
         // Archive date
         $fs->addField($this->_('Archive after'))->push(
             $this->html->datePicker('archiveDate', $this->values->archiveDate)
@@ -152,6 +159,10 @@ class HttpAdd extends arch\node\Form {
             ->addField('body', 'delegate')
                 ->fromForm($this)
 
+            // Post date
+            ->addRequiredField('postDate', 'date')
+                ->shouldDefaultToNow(true)
+
             // Archive date
             ->addField('archiveDate', 'Date')
 
@@ -166,7 +177,7 @@ class HttpAdd extends arch\node\Form {
 
             ->validate($this->values)
             ->applyTo($this->_post, [
-                'slug', 'archiveDate', 'category', 'tags', 'isLive', 'allowComments'
+                'slug', 'postDate', 'archiveDate', 'category', 'tags', 'isLive', 'allowComments'
             ])
             ->applyTo($this->_version, [
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'
@@ -187,11 +198,13 @@ class HttpAdd extends arch\node\Form {
                     $this->_version->post = $this->_post;
                     $this->_version->owner = $this->user->client->getId();
                 }
+
+                $this->_post->lastEditDate = 'now';
             }
 
             if($this->_post->isNew()) {
                 $this->_post->owner = $this->user->client->getId();
-            } else {
+            } else if($this->_post->hasChanged()) {
                 $this->_post->lastEditDate = 'now';
             }
 

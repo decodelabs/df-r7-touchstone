@@ -25,13 +25,13 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     ];
 
     const LIST_FIELDS = [
-        'title', 'category', 'tags', 'owner', 'creationDate', 'lastEditDate',
+        'title', 'category', 'tags', 'owner', 'postDate', 'lastEditDate',
         'archiveDate', 'versions', 'isLive'
     ];
 
     const DETAILS_FIELDS = [
         'title', 'slug', 'owner', 'isLive', 'category', 'tags',
-        'versions', 'creationDate', 'lastEditDate', 'archiveDate',
+        'versions', 'creationDate', 'postDate', 'lastEditDate', 'archiveDate',
         'headerImage', 'intro', 'body'
     ];
 
@@ -141,6 +141,12 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
                     return $this->apex->component('./tags/TagLink', $tag);
                 })
                 ->setLimit(9);
+        });
+    }
+
+    public function definePostDateField($list, $mode) {
+        $list->addField('postDate', $this->_('Posted'), function($post) {
+            return $this->html->date($post['postDate']);
         });
     }
 

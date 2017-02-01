@@ -14,10 +14,10 @@ use df\opal;
 class Unit extends axis\unit\table\Base {
 
     const ORDERABLE_FIELDS = [
-        'slug', 'owner', 'creationDate', 'lastEditDate', 'archiveDate', 'isLive'
+        'slug', 'owner', 'creationDate', 'postDate', 'lastEditDate', 'archiveDate', 'isLive'
     ];
 
-    const DEFAULT_ORDER = 'creationDate DESC';
+    const DEFAULT_ORDER = ['postDate DESC', 'creationDate DESC'];
 
     protected function createSchema($schema) {
         $schema->addField('id', 'AutoId');

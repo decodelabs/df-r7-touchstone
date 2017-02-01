@@ -43,7 +43,7 @@ class HttpEdit extends HttpAdd {
 
     protected function setDefaultValues() {
         $this->values->importFrom($this->_post, [
-            'slug', 'archiveDate', 'isLive', 'allowComments'
+            'slug', 'postDate', 'archiveDate', 'isLive', 'allowComments'
         ]);
 
         $this->values->importFrom($this->_version, [
