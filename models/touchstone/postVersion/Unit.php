@@ -34,10 +34,10 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('headerImage', 'One', 'media/file')
             ->isNullable(true);
 
-        $schema->addField('intro', 'ContentBlock', 'Description');
+        $schema->addField('intro', 'ContentBlock');
         $schema->addField('displayIntro', 'Boolean')
             ->setDefaultValue(true);
 
-        $schema->addField('body', 'ContentSlot', 'Article');
+        $schema->addField('body', 'ContentSlot');
     }
 }
