@@ -21,13 +21,4 @@ class Record extends opal\record\Base {
                 ->where('post', '=', $this)
         ));
     }
-
-    public function getBodySlotDefinition() {
-        return $this->getAdapter()
-            ->getModel()
-            ->getUnit('postVersion')
-            ->getUnitSchema()
-            ->getField('body')
-            ->getSlotDefinition();
-    }
 }

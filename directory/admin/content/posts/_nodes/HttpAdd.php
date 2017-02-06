@@ -43,7 +43,7 @@ class HttpAdd extends arch\node\Form {
 
         $this->loadDelegate('body', '~admin/nightfire/ContentSlot')
             ->isRequired(true)
-            ->setSlotDefinition($this->_post->getBodySlotDefinition());
+            ->setSlotDefinition($this->nightfire->newSlotDefinition('Article'));
     }
 
     protected function setDefaultValues() {
