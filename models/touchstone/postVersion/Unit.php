@@ -38,6 +38,7 @@ class Unit extends axis\unit\table\Base {
         $schema->addField('displayIntro', 'Boolean')
             ->setDefaultValue(true);
 
-        $schema->addField('body', 'ContentSlot');
+        $schema->addField('body', 'ContentSlot')
+            ->isNullable(true);
     }
 }
