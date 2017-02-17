@@ -114,6 +114,40 @@ class Unit extends axis\unit\table\Base {
         );
     }
 
+    public function getPrevNext($post, string $categorySlug=null, ?string ...$tagSlugs): array {
+        return [
+            'prev' => $this->_prevNextQuery('DESC', $post, $categorySlug, ...$tagSlugs)->toRow(),
+            'next' => $this->_prevNextQuery('ASC', $post, $categorySlug, ...$tagSlugs)->toRow()
+        ];
+    }
+
+    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, ?string ...$tagSlugs) {
+        return $this->select('id', 'slug')
+            ->joinRelation('activeVersion', 'title')
+            ->chainIf(!empty($categorySlug), function($query) use($categorySlug) {
+                $query->whereCorrelation('category', 'in', 'id')
+                    ->from('axis://touchstone/Category', 'category')
+                    ->where('category.slug', '=', $categorySlug)
+                    ->endCorrelation();
+            })
+
+            ->chainIf(!empty($tagSlugs), function($query) use($tagSlugs) {
+                $query->whereCorrelation('id', 'in', 'post')
+                    ->from($this->getBridgeUnit('tags'), 'bridge')
+                    ->whereCorrelation('bridge.tag', 'in', 'id')
+                        ->from('axis://touchstone/Tag', 'tag')
+                        ->where('tag.slug', 'in', $tagSlugs)
+                        ->endCorrelation()
+                    ->endCorrelation();
+            })
+
+            ->where('postDate', $direction == 'ASC' ? '>=' : '<=', $post['postDate'])
+            ->where('creationDate', $direction == 'ASC' ? '>=' : '<=', $post['creationDate'])
+            ->where('isLive', '=', true)
+            ->where('id', '!=', $post['id'])
+            ->orderBy('postDate '.$direction, 'creationDate '.$direction);
+    }
+
 
 // Query blocks
     public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
