@@ -45,7 +45,7 @@ class TagSelector extends arch\node\form\SelectorDelegate {
                 ->setIcon('add')
                 ->shouldValidate(false),
 
-            $this->html('<br /><br />')
+            $this->html->string('<br /><br />')
         );
 
         return parent::createInlineDetailsUi($fa);
