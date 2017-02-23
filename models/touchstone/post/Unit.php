@@ -48,7 +48,7 @@ class Unit extends axis\unit\table\Base {
     }
 
 
-    public function selectForIndex(string $categorySlug=null, ?string ...$tagSlugs) {
+    public function selectForIndex(string $categorySlug=null, /*?string*/ ...$tagSlugs) {
         if(empty($tagSlugs[0] ?? null)) {
             unset($tagSlugs[0]);
         }
@@ -92,7 +92,7 @@ class Unit extends axis\unit\table\Base {
             ->orderBy('postDate DESC', 'creationDate DESC');
     }
 
-    public function selectForReading(?string $slug) {
+    public function selectForReading(/*?string*/ $slug) {
         return $this->context->data->selectForAction(
             $this, ['*'],
             ['slug' => $slug],
@@ -114,14 +114,14 @@ class Unit extends axis\unit\table\Base {
         );
     }
 
-    public function getPrevNext($post, string $categorySlug=null, ?string ...$tagSlugs): array {
+    public function getPrevNext($post, string $categorySlug=null, /*?string*/ ...$tagSlugs): array {
         return [
             'prev' => $this->_prevNextQuery('DESC', $post, $categorySlug, ...$tagSlugs)->toRow(),
             'next' => $this->_prevNextQuery('ASC', $post, $categorySlug, ...$tagSlugs)->toRow()
         ];
     }
 
-    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, ?string ...$tagSlugs) {
+    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, /*?string*/ ...$tagSlugs) {
         return $this->select('id', 'slug')
             ->joinRelation('activeVersion', 'title')
             ->chainIf(!empty($categorySlug), function($query) use($categorySlug) {
