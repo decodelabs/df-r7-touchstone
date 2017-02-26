@@ -104,7 +104,7 @@ class HttpAdd extends arch\node\Form {
         $fs->addField($this->_('Tags'))->push($this['tags']);
 
 
-        $fs = $form->addFieldSet($this->_('Intro'));
+        $fs = $form->addFieldSet($this->_('Content'));
 
         // Image
         $fs->addField($this->_('Header image'))->push($this['headerImage']);
@@ -120,7 +120,9 @@ class HttpAdd extends arch\node\Form {
         );
 
         // Body
-        $form->addFieldSet($this->_('Body'))->push($this['body']);
+        $fs->addField($this->_('Body'))->push(
+            $this['body']
+        );
 
 
         // Buttons
