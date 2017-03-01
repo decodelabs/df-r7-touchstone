@@ -33,7 +33,7 @@ class HttpEdit extends HttpAdd {
         }
 
         if(!$this->_version) {
-            throw core\Error::{'fire/type/EVersion,ENotFound'}([
+            throw core\Error::{'opal/record/ENotFound'}([
                 'message' => 'Version not found',
                 'http' => 404
             ]);
