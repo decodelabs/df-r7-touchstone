@@ -33,7 +33,10 @@ class HttpEdit extends HttpAdd {
         }
 
         if(!$this->_version) {
-            $this->throwError(404, 'Version not found');
+            throw core\Error::{'fire/type/EVersion,ENotFound'}([
+                'message' => 'Version not found',
+                'http' => 404
+            ]);
         }
     }
 
