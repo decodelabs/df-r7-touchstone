@@ -182,13 +182,13 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
 
     public function defineIntroField($list, $mode) {
         $list->addField('intro', function($post) {
-            return $this->nightfire->renderBlock($post['activeVersion']['intro'], 'Description');
+            return $this->nightfire->renderBlock($post['activeVersion']['intro']);
         });
     }
 
     public function defineBodyField($list, $mode) {
         $list->addField('body', function($post) {
-            return $this->nightfire->renderSlot($post['activeVersion']['body'], 'Article');
+            return $this->nightfire->renderSlot($post['activeVersion']['body']);
         });
     }
 }
