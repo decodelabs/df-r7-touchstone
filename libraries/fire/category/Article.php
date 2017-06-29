@@ -11,8 +11,6 @@ use df\fire;
 
 class Article extends Base {
 
-    const REQUIRED_OUTPUT_TYPES = ['Html'];
-
     const DEFAULT_BLOCKS = [
         'SimpleTags', 'RawHtml', 'Markdown',
         'Element', 'Heading',
