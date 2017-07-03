@@ -137,10 +137,9 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
                 $tags = $post->tags->select();
             }
 
-            return $this->html->commaList($tags, function($tag) {
-                    return $this->apex->component('./tags/TagLink', $tag);
-                })
-                ->setLimit(9);
+            return $this->html->iList($tags, function($tag) {
+                return $this->apex->component('./tags/TagLink', $tag);
+            }, 9);
         });
     }
 
