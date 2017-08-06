@@ -89,6 +89,7 @@ class Unit extends axis\unit\Table {
                 ->from('axis://touchstone/Category')
                 ->where('slug', 'in', $categories)
                 ->endCorrelation()
+            ->where('isLive', '=', true)
             ->orderBy('postDate DESC', 'creationDate DESC');
     }
 
