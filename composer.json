@@ -10,11 +10,7 @@
         }
     ],
     "require": {
-        "df-r7/base": "dev-develop"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "0.x-dev"
-        }
+        "df-r7/base": "dev-master",
+        "df-r7/webcore": "dev-master"
     }
 }
