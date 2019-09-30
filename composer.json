@@ -11,6 +11,6 @@
     ],
     "require": {
         "df-r7/base": "dev-master",
-        "df-r7/webcore": "dev-master"
+        "df-r7/webCore": "dev-master"
     }
 }
