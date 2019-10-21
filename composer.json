@@ -9,8 +9,30 @@
             "email": "tom@inflatablecookie.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../base"
+        },
+        {
+            "type": "path",
+            "url": "../webCore"
+        }
+    ],
     "require": {
         "df-r7/base": "dev-master",
         "df-r7/webcore": "dev-master"
-    }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.11.16",
+        "phpstan/extension-installer": "^1.0",
+        "decodelabs/phpstan-decodelabs": "^0.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
