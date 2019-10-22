@@ -11,15 +11,16 @@ use df\apex;
 use df\axis;
 use df\opal;
 
-class Unit extends axis\unit\Table {
-
+class Unit extends axis\unit\Table
+{
     const ORDERABLE_FIELDS = [
         'slug', 'owner', 'creationDate', 'postDate', 'lastEditDate', 'archiveDate', 'isLive'
     ];
 
     const DEFAULT_ORDER = ['postDate DESC', 'creationDate DESC'];
 
-    protected function createSchema($schema) {
+    protected function createSchema($schema)
+    {
         $schema->addField('id', 'AutoId');
         $schema->addField('slug', 'Slug');
 
@@ -48,8 +49,9 @@ class Unit extends axis\unit\Table {
     }
 
 
-    public function selectForIndex(string $categorySlug=null, ?string ...$tagSlugs) {
-        if(empty($tagSlugs[0] ?? null)) {
+    public function selectForIndex(string $categorySlug=null, ?string ...$tagSlugs)
+    {
+        if (empty($tagSlugs[0] ?? null)) {
             unset($tagSlugs[0]);
         }
 
@@ -61,14 +63,14 @@ class Unit extends axis\unit\Table {
                 ->orderBy('name ASC')
                 ->asMany('tags')
 
-            ->chainIf(!empty($categorySlug), function($query) use($categorySlug) {
+            ->chainIf(!empty($categorySlug), function ($query) use ($categorySlug) {
                 $query->whereCorrelation('category', 'in', 'id')
                     ->from('axis://touchstone/Category', 'category')
                     ->where('category.slug', '=', $categorySlug)
                     ->endCorrelation();
             })
 
-            ->chainIf(!empty($tagSlugs), function($query) use($tagSlugs) {
+            ->chainIf(!empty($tagSlugs), function ($query) use ($tagSlugs) {
                 $query->whereCorrelation('id', 'in', 'post')
                     ->from($this->getBridgeUnit('tags'), 'bridge')
                     ->whereCorrelation('bridge.tag', 'in', 'id')
@@ -82,7 +84,8 @@ class Unit extends axis\unit\Table {
             ;
     }
 
-    public function selectForCategoryList(string ...$categories) {
+    public function selectForCategoryList(string ...$categories)
+    {
         return $this->select('slug')
             ->joinRelation('activeVersion', 'title')
             ->whereCorrelation('category', 'in', 'id')
@@ -93,11 +96,12 @@ class Unit extends axis\unit\Table {
             ->orderBy('postDate DESC', 'creationDate DESC');
     }
 
-    public function selectForReading(?string $slug) {
+    public function selectForReading(?string $slug)
+    {
         return $this->context->data->selectForAction(
             $this, ['*'],
             ['slug' => $slug],
-            function($query) {
+            function ($query) {
                 $query
                     ->joinRelation('activeVersion', 'title', 'intro', 'displayIntro', 'body')
                     ->importRelationBlock('activeVersion.headerImage', 'link')
@@ -107,7 +111,7 @@ class Unit extends axis\unit\Table {
                         ->orderBy('name ASC')
                         ->asList('tags', 'slug', 'name')
 
-                    ->chainIf(!$this->context->user->isA('admin', 'developer'), function($query) {
+                    ->chainIf(!$this->context->user->isA('admin', 'developer'), function ($query) {
                         $query->where('isLive', '=', true);
                     })
                     ;
@@ -115,24 +119,26 @@ class Unit extends axis\unit\Table {
         );
     }
 
-    public function getPrevNext($post, string $categorySlug=null, ?string ...$tagSlugs): array {
+    public function getPrevNext($post, string $categorySlug=null, ?string ...$tagSlugs): array
+    {
         return [
             'prev' => $this->_prevNextQuery('DESC', $post, $categorySlug, ...$tagSlugs)->toRow(),
             'next' => $this->_prevNextQuery('ASC', $post, $categorySlug, ...$tagSlugs)->toRow()
         ];
     }
 
-    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, ?string ...$tagSlugs) {
+    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, ?string ...$tagSlugs)
+    {
         return $this->select('id', 'slug')
             ->joinRelation('activeVersion', 'title')
-            ->chainIf(!empty($categorySlug), function($query) use($categorySlug) {
+            ->chainIf(!empty($categorySlug), function ($query) use ($categorySlug) {
                 $query->whereCorrelation('category', 'in', 'id')
                     ->from('axis://touchstone/Category', 'category')
                     ->where('category.slug', '=', $categorySlug)
                     ->endCorrelation();
             })
 
-            ->chainIf(!empty($tagSlugs), function($query) use($tagSlugs) {
+            ->chainIf(!empty($tagSlugs), function ($query) use ($tagSlugs) {
                 $query->whereCorrelation('id', 'in', 'post')
                     ->from($this->getBridgeUnit('tags'), 'bridge')
                     ->whereCorrelation('bridge.tag', 'in', 'id')
@@ -150,22 +156,37 @@ class Unit extends axis\unit\Table {
     }
 
 
-// Query blocks
-    public function applyTitleQueryBlock(opal\query\IReadQuery $query) {
+    // Query blocks
+    public function applyTitleQueryBlock(opal\query\IReadQuery $query)
+    {
+        if (!$query instanceof opal\query\IJoinableQuery) {
+            return;
+        }
+
         $query->leftJoinRelation('activeVersion', 'title');
     }
 
-    public function applyActiveVersionQueryBlock(opal\query\IReadQuery $query, $body=false) {
+    public function applyActiveVersionQueryBlock(opal\query\IReadQuery $query, $body=false)
+    {
+        if (!$query instanceof opal\query\IJoinableQuery) {
+            return;
+        }
+
         $fields = ['title', 'headerImage', 'intro', 'displayIntro'];
 
-        if($body) {
+        if ($body) {
             $fields[] = 'body';
         }
 
         $query->leftJoinRelation('activeVersion', $fields);
     }
 
-    public function applyTagSlugClauseQueryBlock(opal\query\IReadQuery $query, array $slugs) {
+    public function applyTagSlugClauseQueryBlock(opal\query\IReadQuery $query, array $slugs)
+    {
+        if (!$query instanceof opal\query\IWhereClauseQuery) {
+            return;
+        }
+
         $query
             ->whereCorrelation('id', 'in', 'post')
                 ->from($this->getBridgeUnit('tags'), 'bridge')
