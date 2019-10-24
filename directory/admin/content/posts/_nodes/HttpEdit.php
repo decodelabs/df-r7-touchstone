@@ -10,21 +10,24 @@ use df\core;
 use df\apex;
 use df\arch;
 
-class HttpEdit extends HttpAdd {
+use DecodeLabs\Glitch;
 
-    protected function init() {
+class HttpEdit extends HttpAdd
+{
+    protected function init()
+    {
         $this->_post = $this->scaffold->getRecord();
 
         $versionId = null;
 
-        if(isset($this->request['version'])) {
+        if (isset($this->request['version'])) {
             $this->_keepVersion = true;
             $versionId = $this->request['version'];
-        } else if(isset($this->request['rebase'])) {
+        } elseif (isset($this->request['rebase'])) {
             $versionId = $this->request['rebase'];
         }
 
-        if($versionId) {
+        if ($versionId) {
             $this->_version = $this->_post->versions->fetch()
                 ->where('id', '=', $versionId)
                 ->toRow();
@@ -32,19 +35,21 @@ class HttpEdit extends HttpAdd {
             $this->_version = $this->_post['activeVersion'];
         }
 
-        if(!$this->_version) {
-            throw core\Error::{'opal/record/ENotFound'}([
+        if (!$this->_version) {
+            throw Glitch::{'df/opal/record/ENotFound'}([
                 'message' => 'Version not found',
                 'http' => 404
             ]);
         }
     }
 
-    protected function getInstanceId() {
+    protected function getInstanceId()
+    {
         return $this->_post['id'].':'.$this->_version['id'];
     }
 
-    protected function setDefaultValues() {
+    protected function setDefaultValues()
+    {
         $this->values->importFrom($this->_post, [
             'slug', 'postDate', 'archiveDate', 'isLive', 'allowComments'
         ]);
