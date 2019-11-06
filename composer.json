@@ -11,12 +11,12 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "../base"
+            "type": "vcs",
+            "url": "git@github.com:decodelabs/df-r7-base.git"
         },
         {
-            "type": "path",
-            "url": "../webCore"
+            "type": "vcs",
+            "url": "git@github.com:decodelabs/df-r7-webCore.git"
         }
     ],
     "require": {
