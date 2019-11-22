@@ -11,8 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
-class HttpScaffold extends arch\scaffold\RecordAdmin {
-
+class HttpScaffold extends arch\scaffold\RecordAdmin
+{
     const TITLE = 'Posts';
     const ICON = 'post';
     const ADAPTER = 'axis://touchstone/Post';
@@ -35,8 +35,9 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         'headerImage', 'intro', 'body'
     ];
 
-// Record data
-    protected function prepareRecordList($query, $mode) {
+    // Record data
+    protected function prepareRecordList($query, $mode)
+    {
         $query->countRelation('versions')
             ->importRelationBlock('category', 'link')
             ->importRelationBlock('tags', 'link')
@@ -46,7 +47,8 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
                 ->addOrderableFields('title');
     }
 
-    protected function searchRecordList($query, $search) {
+    protected function searchRecordList($query, $search)
+    {
         $query->searchFor($search, [
             'title' => 10,
             'activeVersion.intro' => 0.7,
@@ -54,23 +56,26 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         ]);
     }
 
-    protected function countSectionItems($post) {
+    protected function countSectionItems($post)
+    {
         return [
             'versions' => $post->versions->countAll(),
             'comments' => $this->data->content->comment->countFor($post)
         ];
     }
 
-    protected function nameRecord($record) {
-        if(isset($record['title'])) {
+    protected function nameRecord($record)
+    {
+        if (isset($record['title'])) {
             return $record['title'];
         } else {
             return $record['slug'];
         }
     }
 
-// Components
-    public function addIndexTransitiveLinks($menu, $bar) {
+    // Components
+    public function addIndexTransitiveLinks($menu, $bar)
+    {
         $menu->addLinks(
             $this->html->link('./categories/', $this->_('Categories'))
                 ->setIcon('category')
@@ -83,9 +88,10 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     }
 
 
-// Sections
-    public function renderCommentsSectionBody($post) {
-        if(!$post['allowComments']) {
+    // Sections
+    public function renderCommentsSectionBody($post)
+    {
+        if (!$post['allowComments']) {
             yield $this->html->flashMessage($this->_(
                 'Comments are currently disabled for this post'
             ), 'warning');
@@ -97,7 +103,8 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
             ->shouldShowInactive(true);
     }
 
-    public function renderVersionsSectionBody($post) {
+    public function renderVersionsSectionBody($post)
+    {
         $template = $this->apex->template('Versions.html');
         $template['post'] = $post;
         $template['versionList'] = $post->versions->fetch()
@@ -106,14 +113,15 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         return $template;
     }
 
-// Fields
-    public function defineTitleField($list, $mode) {
-        if($mode == 'list') {
+    // Fields
+    public function defineTitleField($list, $mode)
+    {
+        if ($mode == 'list') {
             return false;
         }
 
-        $list->addField('title', function($post) {
-            if($post['title']) {
+        $list->addField('title', function ($post) {
+            if ($post['title']) {
                 return $post['title'];
             }
 
@@ -121,40 +129,44 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         });
     }
 
-    public function defineCategoryField($list, $mode) {
-        $list->addField('category', function($post) {
+    public function defineCategoryField($list, $mode)
+    {
+        $list->addField('category', function ($post) {
             return $this->apex->component('./categories/CategoryLink', $post['category'])
                 ->isNullable(true);
         });
     }
 
-    public function defineTagsField($list, $mode) {
-        $list->addField('tags', function($post, $context) use($mode) {
-            if($mode == 'list') {
+    public function defineTagsField($list, $mode)
+    {
+        $list->addField('tags', function ($post, $context) use ($mode) {
+            if ($mode == 'list') {
                 $tags = $post['tags'];
                 $context->cellTag['width'] = '20%';
             } else {
                 $tags = $post->tags->select();
             }
 
-            return $this->html->iList($tags, function($tag) {
+            return Html::iList($tags, function ($tag) {
                 return $this->apex->component('./tags/TagLink', $tag);
-            }, 9);
+            }, null, null, 9);
         });
     }
 
-    public function definePostDateField($list, $mode) {
-        $list->addField('postDate', $this->_('Posted'), function($post) {
+    public function definePostDateField($list, $mode)
+    {
+        $list->addField('postDate', $this->_('Posted'), function ($post) {
             return $this->html->date($post['postDate']);
         });
     }
 
-    public function defineArchiveDateField($list, $mode) {
-        $list->addField('archiveDate', $this->_('Archive'), function($post, $context) {
-            if($post['archiveDate']) {
+    public function defineArchiveDateField($list, $mode)
+    {
+        $list->addField('archiveDate', $this->_('Archive'), function ($post, $context) {
+            if ($post['archiveDate']) {
                 $output = $this->html->date($post['archiveDate'], 'short');
 
-                if($post['archiveDate']->isPast()) {
+                if ($post['archiveDate']->isPast()) {
                     $output->addClass('negative');
                     $context->getRowTag()->addClass('inactive');
                 }
@@ -164,29 +176,33 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         });
     }
 
-    public function defineVersionsField($list, $mode) {
-        if($mode == 'list') {
+    public function defineVersionsField($list, $mode)
+    {
+        if ($mode == 'list') {
             $list->addField('versions', $this->_('V.'));
         } else {
             return false;
         }
     }
 
-    public function defineHeaderImageField($list, $mode) {
-        $list->addField('headerImage', function($post) {
+    public function defineHeaderImageField($list, $mode)
+    {
+        $list->addField('headerImage', function ($post) {
             return $this->apex->component('~admin/media/files/FileLink', $post['activeVersion']['headerImage'])
                 ->isNullable(true);
         });
     }
 
-    public function defineIntroField($list, $mode) {
-        $list->addField('intro', function($post) {
+    public function defineIntroField($list, $mode)
+    {
+        $list->addField('intro', function ($post) {
             return $this->nightfire->renderBlock($post['activeVersion']['intro']);
         });
     }
 
-    public function defineBodyField($list, $mode) {
-        $list->addField('body', function($post) {
+    public function defineBodyField($list, $mode)
+    {
+        $list->addField('body', function ($post) {
             return $this->nightfire->renderSlot($post['activeVersion']['body']);
         });
     }

@@ -13,26 +13,32 @@ use df\fire;
 use df\aura;
 use df\opal;
 
-class TagSelector extends arch\node\form\SelectorDelegate {
+use DecodeLabs\Tagged\Html;
 
-    protected function _getBaseQuery($fields=null) {
+class TagSelector extends arch\node\form\SelectorDelegate
+{
+    protected function _getBaseQuery($fields=null)
+    {
         return $this->data->touchstone->tag->select($fields)
             ->countRelation('posts')
             ->orderBy('name ASC');
     }
 
-    protected function _renderCollectionList($result) {
+    protected function _renderCollectionList($result)
+    {
         return $this->apex->component('TagList', [
                 'actions' => false
             ])
             ->setCollection($result);
     }
 
-    protected function _getResultDisplayName($record) {
+    protected function _getResultDisplayName($record)
+    {
         return $record['slug'];
     }
 
-    protected function createInlineDetailsUi(aura\html\widget\Field $fa) {
+    protected function createInlineDetailsUi(aura\html\widget\Field $fa)
+    {
         $fa->push(
             $this->html->textbox($this->fieldName('slug'), $this->values->slug)
                 ->setPlaceholder('Separate with commas: news, my stuff, etc')
@@ -45,17 +51,18 @@ class TagSelector extends arch\node\form\SelectorDelegate {
                 ->setIcon('add')
                 ->shouldValidate(false),
 
-            $this->html->string('<br /><br />')
+            Html::raw('<br /><br />')
         );
 
         return parent::createInlineDetailsUi($fa);
     }
 
-    protected function onInsertEvent() {
-        foreach(explode(',', $this->values['slug']) as $slug) {
+    protected function onInsertEvent()
+    {
+        foreach (explode(',', $this->values['slug']) as $slug) {
             $slug = trim($slug);
 
-            if(!strlen($slug)) {
+            if (!strlen($slug)) {
                 continue;
             }
 
@@ -67,8 +74,9 @@ class TagSelector extends arch\node\form\SelectorDelegate {
         unset($this->values->slug);
     }
 
-    public function apply() {
-        if($this->values->slug->hasValue()) {
+    public function apply()
+    {
+        if ($this->values->slug->hasValue()) {
             $this->onInsertEvent();
         }
 
