@@ -6,25 +6,25 @@ echo $this->html->collectionList($versionList)
     ->addField('title')
 
     // Created
-    ->addField('creationDate', $this->_('Created'), function($version) {
-        return $this->html->date($version['creationDate']);
+    ->addField('creationDate', $this->_('Created'), function ($version) {
+        return Html::$time->since($version['creationDate']);
     })
 
     // Last edited
-    ->addField('lastEditDate', $this->_('Edited'), function($version) {
-        return $this->html->timeSince($version['lastEditDate']);
+    ->addField('lastEditDate', $this->_('Edited'), function ($version) {
+        return Html::$time->since($version['lastEditDate']);
     })
 
     // Owner
-    ->addField('owner', function($version) {
+    ->addField('owner', function ($version) {
         return $this->apex->component('~admin/users/clients/UserLink', $version['owner']);
     })
 
     // Actions
-    ->addField('actions', function($version, $context) use($post) {
+    ->addField('actions', function ($version, $context) use ($post) {
         $isActive = false;
 
-        if($version['id'] == $post['#activeVersion']) {
+        if ($version['id'] == $post['#activeVersion']) {
             $isActive = true;
             $context->getRowTag()->addClass('active');
         }

@@ -11,6 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
+use DecodeLabs\Tagged\Html;
+
 class HttpScaffold extends arch\scaffold\RecordAdmin
 {
     const TITLE = 'Posts';
@@ -156,7 +158,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     public function definePostDateField($list, $mode)
     {
         $list->addField('postDate', $this->_('Posted'), function ($post) {
-            return $this->html->date($post['postDate']);
+            return Html::$time->date($post['postDate']);
         });
     }
 
@@ -164,7 +166,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     {
         $list->addField('archiveDate', $this->_('Archive'), function ($post, $context) {
             if ($post['archiveDate']) {
-                $output = $this->html->date($post['archiveDate'], 'short');
+                $output = Html::$time->shortDate($post['archiveDate']);
 
                 if ($post['archiveDate']->isPast()) {
                     $output->addClass('negative');
