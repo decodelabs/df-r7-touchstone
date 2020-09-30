@@ -10,7 +10,7 @@ use df\core;
 use df\apex;
 use df\arch;
 
-use DecodeLabs\Glitch;
+use DecodeLabs\Exceptional;
 
 class HttpEdit extends HttpAdd
 {
@@ -36,7 +36,7 @@ class HttpEdit extends HttpAdd
         }
 
         if (!$this->_version) {
-            throw Glitch::{'df/opal/record/ENotFound'}([
+            throw Exceptional::{'df/opal/record/NotFound'}([
                 'message' => 'Version not found',
                 'http' => 404
             ]);
