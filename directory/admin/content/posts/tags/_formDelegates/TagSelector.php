@@ -13,28 +13,31 @@ use df\fire;
 use df\aura;
 use df\opal;
 
+use df\opal\query\ISelectQuery as SelectQuery;
+use df\arch\IComponent as Component;
+
 use DecodeLabs\Tagged\Html;
 
 class TagSelector extends arch\node\form\SelectorDelegate
 {
-    protected function _getBaseQuery($fields=null)
+    protected function getBaseQuery(?array $fields=null): SelectQuery
     {
         return $this->data->touchstone->tag->select($fields)
             ->countRelation('posts')
             ->orderBy('name ASC');
     }
 
-    protected function _renderCollectionList($result)
+    protected function renderCollectionList(?iterable $collection): ?Component
     {
         return $this->apex->component('TagList', [
                 'actions' => false
             ])
-            ->setCollection($result);
+            ->setCollection($collection);
     }
 
-    protected function _getResultDisplayName($record)
+    protected function getResultDisplayName(array $tag)
     {
-        return $record['slug'];
+        return $tag['slug'];
     }
 
     protected function createInlineDetailsUi(aura\html\widget\Field $fa)
