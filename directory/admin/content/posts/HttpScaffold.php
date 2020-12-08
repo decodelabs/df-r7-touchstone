@@ -66,7 +66,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
         ];
     }
 
-    protected function nameRecord($record)
+    public function nameRecord($record)
     {
         if (isset($record['title'])) {
             return $record['title'];
