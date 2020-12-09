@@ -58,7 +58,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
         ]);
     }
 
-    protected function countSectionItems($post)
+    protected function countSectionItems($post): array
     {
         return [
             'versions' => $post->versions->countAll(),
@@ -76,17 +76,15 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     }
 
     // Components
-    public function addIndexTransitiveLinks($menu, $bar)
+    public function generateIndexTransitiveLinks(): iterable
     {
-        $menu->addLinks(
-            $this->html->link('./categories/', $this->_('Categories'))
-                ->setIcon('category')
-                ->setDisposition('transitive'),
+        yield 'categories' => $this->html->link('./categories/', $this->_('Categories'))
+            ->setIcon('category')
+            ->setDisposition('transitive');
 
-            $this->html->link('./tags/', $this->_('Tags'))
-                ->setIcon('tag')
-                ->setDisposition('transitive')
-        );
+        yield 'tags' => $this->html->link('./tags/', $this->_('Tags'))
+            ->setIcon('tag')
+            ->setDisposition('transitive');
     }
 
 

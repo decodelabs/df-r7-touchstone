@@ -11,8 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
-class HttpScaffold extends arch\scaffold\RecordAdmin {
-
+class HttpScaffold extends arch\scaffold\RecordAdmin
+{
     const TITLE = 'Categories';
     const ICON = 'category';
     const ADAPTER = 'axis://touchstone/Category';
@@ -31,16 +31,18 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     ];
 
 
-// Record data
-    protected function prepareRecordList($query, $mode) {
+    // Record data
+    protected function prepareRecordList($query, $mode)
+    {
         $query
             ->countRelation('posts')
             ->importRelationBlock('image', 'link');
     }
 
 
-// Sections
-    public function renderPostsSectionBody($category) {
+    // Sections
+    public function renderPostsSectionBody($category)
+    {
         return $this->apex->scaffold('../')
             ->renderRecordList(
                 $category->posts->select(),
@@ -49,38 +51,36 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
     }
 
 
-// Components
-    public function addPostsSectionSubOperativeLinks($menu, $bar) {
-        $category = $this->getRecord();
-
-        $menu->addLinks(
-            $this->html->link(
-                    $this->uri('../add?category='.$category['id'], true),
-                    $this->_('Add post')
-                )
-                ->setIcon('add')
-        );
+    // Components
+    public function generatePostsSectionSubOperativeLinks(): iterable
+    {
+        yield 'add' => $this->html->link(
+                $this->uri('../add?category='.$this->getRecordId(), true),
+                $this->_('Add post')
+            )
+            ->setIcon('add');
     }
 
-    public function addIndexTransitiveLinks($menu, $bar) {
-        $menu->addLinks(
-            $this->html->link('../tags/', $this->_('Tags'))
-                ->setIcon('tag')
-                ->setDisposition('transitive')
-        );
+    public function generateIndexTransitiveLinks(): iterable
+    {
+        yield 'tags' => $this->html->link('../tags/', $this->_('Tags'))
+            ->setIcon('tag')
+            ->setDisposition('transitive');
     }
 
 
-// Fields
-    public function defineImageField($list, $mode) {
-        $list->addField('image', function($category) {
+    // Fields
+    public function defineImageField($list, $mode)
+    {
+        $list->addField('image', function ($category) {
             return $this->apex->component('~admin/media/files/FileLink', $category['image'])
                 ->isNullable(true);
         });
     }
 
-    public function defineDescriptionField($list, $mode) {
-        $list->addField('description', function($category) {
+    public function defineDescriptionField($list, $mode)
+    {
+        $list->addField('description', function ($category) {
             return $this->html->simpleTags($category['description']);
         });
     }

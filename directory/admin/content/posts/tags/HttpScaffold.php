@@ -11,8 +11,8 @@ use df\apex;
 use df\arch;
 use df\opal;
 
-class HttpScaffold extends arch\scaffold\RecordAdmin {
-
+class HttpScaffold extends arch\scaffold\RecordAdmin
+{
     const TITLE = 'Tags';
     const ICON = 'tag';
     const ADAPTER = 'axis://touchstone/Tag';
@@ -27,27 +27,28 @@ class HttpScaffold extends arch\scaffold\RecordAdmin {
         'slug', 'name', 'posts'
     ];
 
-// Record data
-    protected function prepareRecordList($query, $mode) {
+    // Record data
+    protected function prepareRecordList($query, $mode)
+    {
         $query
             ->countRelation('posts');
     }
 
 
-// Sections
-    public function renderPostsSectionBody($tag) {
+    // Sections
+    public function renderPostsSectionBody($tag)
+    {
         return $this->apex->scaffold('../')
             ->renderRecordList(
                 $tag->posts->select()
             );
     }
 
-// Components
-    public function addIndexTransitiveLinks($menu, $bar) {
-        $menu->addLinks(
-            $this->html->link('../categories/', $this->_('Categories'))
-                ->setIcon('category')
-                ->setDisposition('transitive')
-        );
+    // Components
+    public function generateIndexTransitiveLinks(): iterable
+    {
+        yield 'categories' => $this->html->link('../categories/', $this->_('Categories'))
+            ->setIcon('category')
+            ->setDisposition('transitive');
     }
 }
