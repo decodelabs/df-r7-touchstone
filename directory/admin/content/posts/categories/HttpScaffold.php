@@ -44,10 +44,11 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     public function renderPostsSectionBody($category)
     {
         return $this->apex->scaffold('../')
-            ->renderRecordList(
-                $category->posts->select(),
-                ['category' => false]
-            );
+            ->renderRecordList(function ($query) use ($category) {
+                $query->where('category', '=', $category['id']);
+            }, [
+                'category' => false
+            ]);
     }
 
 

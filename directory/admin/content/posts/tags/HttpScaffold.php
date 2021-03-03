@@ -39,9 +39,12 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     public function renderPostsSectionBody($tag)
     {
         return $this->apex->scaffold('../')
-            ->renderRecordList(
-                $tag->posts->select()
-            );
+            ->renderRecordList(function ($query) use ($tag) {
+                $query->whereCorrelation('id', 'in', 'post')
+                    ->from($this->data->touchstone->post->getBridgeUnit('tags'), 'bridge')
+                    ->where('bridge.tag', '=', $tag['id'])
+                    ->endCorrelation();
+            });
     }
 
     // Components
