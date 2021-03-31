@@ -16,7 +16,7 @@ use df\opal;
 use df\opal\query\ISelectQuery as SelectQuery;
 use df\arch\IComponent as Component;
 
-use DecodeLabs\Tagged\Html;
+use DecodeLabs\Tagged as Html;
 
 class TagSelector extends arch\node\form\SelectorDelegate
 {
