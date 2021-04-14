@@ -16,6 +16,7 @@ use df\opal;
 use df\opal\query\ISelectQuery as SelectQuery;
 use df\arch\IComponent as Component;
 
+use DecodeLabs\Dictum;
 use DecodeLabs\Tagged as Html;
 
 class TagSelector extends arch\node\form\SelectorDelegate
@@ -69,7 +70,7 @@ class TagSelector extends arch\node\form\SelectorDelegate
                 continue;
             }
 
-            $name = $this->format->name($slug);
+            $name = Dictum::name($slug);
             $tag = $this->data->touchstone->tag->ensureTagExists($slug, $name);
             $this->addSelected($tag['id']);
         }

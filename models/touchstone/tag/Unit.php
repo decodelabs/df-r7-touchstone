@@ -11,6 +11,8 @@ use df\apex;
 use df\axis;
 use df\opal;
 
+use DecodeLabs\Dictum;
+
 class Unit extends axis\unit\Table
 {
     const ORDERABLE_FIELDS = [
@@ -30,10 +32,10 @@ class Unit extends axis\unit\Table
     public function ensureTagExists($slug, $name=null)
     {
         if ($name === null) {
-            $name = $this->context->format->name($slug);
+            $name = Dictum::name($slug);
         }
 
-        $slug = $this->context->format->slug($slug);
+        $slug = Dictum::slug($slug);
 
         if (!$output = $this->fetch()->where('slug', '=', $slug)->toRow()) {
             $output = $this->newRecord([
