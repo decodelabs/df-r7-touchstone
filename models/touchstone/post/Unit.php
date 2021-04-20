@@ -11,6 +11,8 @@ use df\apex;
 use df\axis;
 use df\opal;
 
+use DecodeLabs\Disciple;
+
 class Unit extends axis\unit\Table
 {
     const ORDERABLE_FIELDS = [
@@ -111,7 +113,7 @@ class Unit extends axis\unit\Table
                         ->orderBy('name ASC')
                         ->asList('tags', 'slug', 'name')
 
-                    ->chainIf(!$this->context->user->isA('admin', 'developer'), function ($query) {
+                    ->chainIf(!Disciple::isA('admin', 'developer'), function ($query) {
                         $query->where('isLive', '=', true);
                     })
                     ;

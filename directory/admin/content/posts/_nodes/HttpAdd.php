@@ -10,18 +10,22 @@ use df\core;
 use df\apex;
 use df\arch;
 
-class HttpAdd extends arch\node\Form {
+use DecodeLabs\Disciple;
 
+class HttpAdd extends arch\node\Form
+{
     protected $_post;
     protected $_version;
     protected $_keepVersion = false;
 
-    protected function init() {
+    protected function init()
+    {
         $this->_post = $this->scaffold->newRecord();
         $this->_version = $this->data->newRecord('axis://touchstone/PostVersion');
     }
 
-    protected function loadDelegates() {
+    protected function loadDelegates()
+    {
         $this->loadDelegate('category', './categories/CategorySelector')
             ->isForOne(true)
             ->isRequired(false)
@@ -45,13 +49,15 @@ class HttpAdd extends arch\node\Form {
             ->setCategory('Article');
     }
 
-    protected function setDefaultValues() {
+    protected function setDefaultValues()
+    {
         $this->values->isLive = true;
         $this->values->displayIntro = true;
         $this->values->allowComments = true;
     }
 
-    protected function createUi() {
+    protected function createUi()
+    {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Post details'));
 
@@ -129,7 +135,8 @@ class HttpAdd extends arch\node\Form {
         $form->addDefaultButtonGroup();
     }
 
-    protected function onSaveEvent() {
+    protected function onSaveEvent()
+    {
         $validator = $this->data->newValidator()
 
             // Title
@@ -184,9 +191,9 @@ class HttpAdd extends arch\node\Form {
                 'title', 'headerImage', 'intro', 'displayIntro', 'body'
             ]);
 
-        return $this->complete(function() {
-            if($this->_version->hasChanged()) {
-                if(!$this->_keepVersion) {
+        return $this->complete(function () {
+            if ($this->_version->hasChanged()) {
+                if (!$this->_keepVersion) {
                     $this->_version->makeNew();
                     $this->_version->creationDate = null;
                     $this->_version->lastEditDate = null;
@@ -195,17 +202,17 @@ class HttpAdd extends arch\node\Form {
                     $this->_version->lastEditDate = 'now';
                 }
 
-                if($this->_version->isNew()) {
+                if ($this->_version->isNew()) {
                     $this->_version->post = $this->_post;
-                    $this->_version->owner = $this->user->client->getId();
+                    $this->_version->owner = Disciple::getId();
                 }
 
                 $this->_post->lastEditDate = 'now';
             }
 
-            if($this->_post->isNew()) {
-                $this->_post->owner = $this->user->client->getId();
-            } else if($this->_post->hasChanged()) {
+            if ($this->_post->isNew()) {
+                $this->_post->owner = Disciple::getId();
+            } elseif ($this->_post->hasChanged()) {
                 $this->_post->lastEditDate = 'now';
             }
 
