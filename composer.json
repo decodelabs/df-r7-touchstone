@@ -40,6 +40,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "analyze": "phpstan analyze --no-progress"
+        "analyze": "phpstan analyze"
     }
 }
