@@ -3,6 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\categories;
 
 use df;
@@ -11,22 +12,24 @@ use df\apex;
 use df\arch;
 use df\opal;
 
+use DecodeLabs\Metamorph;
+
 class HttpScaffold extends arch\scaffold\RecordAdmin
 {
-    const TITLE = 'Categories';
-    const ICON = 'category';
-    const ADAPTER = 'axis://touchstone/Category';
+    public const TITLE = 'Categories';
+    public const ICON = 'category';
+    public const ADAPTER = 'axis://touchstone/Category';
 
-    const SECTIONS = [
+    public const SECTIONS = [
         'details',
         'posts' => 'post'
     ];
 
-    const LIST_FIELDS = [
+    public const LIST_FIELDS = [
         'name', 'posts', 'image', 'color'
     ];
 
-    const DETAILS_FIELDS = [
+    public const DETAILS_FIELDS = [
         'name', 'slug', 'image', 'color', 'description'
     ];
 
@@ -82,7 +85,7 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     public function defineDescriptionField($list, $mode)
     {
         $list->addField('description', function ($category) {
-            return $this->html->simpleTags($category['description']);
+            return Metamorph::idiom($category['description']);
         });
     }
 }
