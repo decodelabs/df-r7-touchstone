@@ -3,6 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\_nodes;
 
 use df;
@@ -26,26 +27,54 @@ class HttpAdd extends arch\node\Form
 
     protected function loadDelegates()
     {
-        $this->loadDelegate('category', './categories/CategorySelector')
+        /**
+         * Category
+         * @var arch\scaffold\Node\Form\SelectorDelegate $category
+         */
+        $category = $this->loadDelegate('category', './categories/CategorySelector');
+        $category
             ->isForOne(true)
             ->isRequired(false)
             ->setDefaultSearchString('*');
 
-        $this->loadDelegate('tags', './tags/TagSelector')
+
+        /**
+         * Tag
+         * @var arch\scaffold\Node\Form\SelectorDelegate $tag
+         */
+        $tag = $this->loadDelegate('tags', './tags/TagSelector');
+        $tag
             ->isForMany(true)
             ->isRequired(false);
 
-        $this->loadDelegate('headerImage', '~admin/media/FileSelector')
+        /**
+         * Header image
+         * @var apex\directory\shared\media\_formDelegates\FileSelector $headerImage
+         */
+        $headerImage = $this->loadDelegate('headerImage', '~admin/media/FileSelector');
+        $headerImage
             ->setBucket('posts')
             ->setAcceptTypes('image/*')
             ->isForOne(true)
             ->isRequired(false);
 
-        $this->loadDelegate('intro', '~admin/nightfire/ContentBlock')
+
+        /**
+         * Intro
+         * @var apex\directory\shared\nightfire\_formDelegates\ContentBlock $intro
+         */
+        $intro = $this->loadDelegate('intro', '~admin/nightfire/ContentBlock');
+        $intro
             ->setCategory('Description')
             ->isRequired(true);
 
-        $this->loadDelegate('body', '~admin/nightfire/ContentSlot')
+
+        /**
+         * Body
+         * @var  apex\directory\shared\nightfire\_formDelegates\ContentSlot $body
+         */
+        $body = $this->loadDelegate('body', '~admin/nightfire/ContentSlot');
+        $body
             ->setCategory('Article');
     }
 

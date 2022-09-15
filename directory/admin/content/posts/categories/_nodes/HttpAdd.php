@@ -3,6 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\categories\_nodes;
 
 use df;
@@ -10,23 +11,31 @@ use df\core;
 use df\apex;
 use df\arch;
 
-class HttpAdd extends arch\node\Form {
-
+class HttpAdd extends arch\node\Form
+{
     protected $_category;
 
-    protected function init() {
+    protected function init()
+    {
         $this->_category = $this->scaffold->newRecord();
     }
 
-    protected function loadDelegates() {
-        $this->loadDelegate('image', '~admin/media/FileSelector')
+    protected function loadDelegates()
+    {
+        /**
+         * Image
+         * @var apex\directory\shared\media\_formDelegates\FileSelector $image
+         */
+        $image = $this->loadDelegate('image', '~admin/media/FileSelector');
+        $image
             ->setAcceptTypes('image/*')
             ->setBucket('posts')
             ->isForOne(true)
             ->isRequired(false);
     }
 
-    protected function createUi() {
+    protected function createUi()
+    {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Category details'));
 
@@ -60,7 +69,8 @@ class HttpAdd extends arch\node\Form {
         $fs->addDefaultButtonGroup();
     }
 
-    protected function onSaveEvent() {
+    protected function onSaveEvent()
+    {
         $this->data->newValidator()
 
             // Name
@@ -85,7 +95,7 @@ class HttpAdd extends arch\node\Form {
             ->validate($this->values)
             ->applyTo($this->_category);
 
-        return $this->complete(function() {
+        return $this->complete(function () {
             $this->_category->save();
             $this->comms->flashSaveSuccess('category');
         });
