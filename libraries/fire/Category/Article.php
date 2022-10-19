@@ -3,15 +3,12 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
-namespace df\fire\category;
 
-use df;
-use df\core;
-use df\fire;
+namespace df\fire\Category;
 
-class Article extends Base {
-
-    const DEFAULT_BLOCKS = [
+class Article extends Base
+{
+    public const DEFAULT_BLOCKS = [
         'SimpleTags', 'RawHtml', 'Markdown',
         'Element', 'Heading',
         'LibraryImage', 'AudioEmbed', 'VideoEmbed'
