@@ -5,5 +5,5 @@ parameters:
         - %currentWorkingDirectory%/tests/bootstrap.php
     paths:
         - directory
-        - libraries
         - models
+        - provider
