@@ -6,10 +6,9 @@
 
 namespace df\apex\directory\admin\content\posts\categories\_nodes;
 
-use df;
-use df\core;
-use df\apex;
 use df\arch;
+
+use df\apex\directory\shared\media\_formDelegates\FileSelector;
 
 class HttpAdd extends arch\node\Form
 {
@@ -20,14 +19,11 @@ class HttpAdd extends arch\node\Form
         $this->_category = $this->scaffold->newRecord();
     }
 
-    protected function loadDelegates()
+    protected function loadDelegates(): void
     {
-        /**
-         * Image
-         * @var apex\directory\shared\media\_formDelegates\FileSelector $image
-         */
-        $image = $this->loadDelegate('image', '~admin/media/FileSelector');
-        $image
+        // Image
+        $this->loadDelegate('image', '~admin/media/FileSelector')
+            ->as(FileSelector::class)
             ->setAcceptTypes('image/*')
             ->setBucket('posts')
             ->isForOne(true)

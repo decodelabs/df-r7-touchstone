@@ -6,10 +6,13 @@
 
 namespace df\apex\directory\admin\content\posts\_nodes;
 
-use df;
-use df\core;
 use df\apex;
 use df\arch;
+
+use df\arch\node\form\SelectorDelegate;
+use df\apex\directory\shared\media\_formDelegates\FileSelector;
+use df\apex\directory\shared\nightfire\_formDelegates\ContentBlock;
+use df\apex\directory\shared\nightfire\_formDelegates\ContentSlot;
 
 use DecodeLabs\Disciple;
 
@@ -25,60 +28,46 @@ class HttpAdd extends arch\node\Form
         $this->_version = $this->data->newRecord('axis://touchstone/PostVersion');
     }
 
-    protected function loadDelegates()
+    protected function loadDelegates(): void
     {
-        /**
-         * Category
-         * @var arch\scaffold\Node\Form\SelectorDelegate $category
-         */
-        $category = $this->loadDelegate('category', './categories/CategorySelector');
-        $category
+        // Category
+        $this->loadDelegate('category', './categories/CategorySelector')
+            ->as(SelectorDelegate::class)
             ->isForOne(true)
             ->isRequired(false)
             ->setDefaultSearchString('*');
 
 
-        /**
-         * Tag
-         * @var arch\scaffold\Node\Form\SelectorDelegate $tag
-         */
-        $tag = $this->loadDelegate('tags', './tags/TagSelector');
-        $tag
+        // Tags
+        $this->loadDelegate('tags', './tags/TagSelector')
+            ->as(SelectorDelegate::class)
             ->isForMany(true)
             ->isRequired(false);
 
-        /**
-         * Header image
-         * @var apex\directory\shared\media\_formDelegates\FileSelector $headerImage
-         */
-        $headerImage = $this->loadDelegate('headerImage', '~admin/media/FileSelector');
-        $headerImage
+
+        // Header image
+        $this->loadDelegate('headerImage', '~admin/media/FileSelector')
+            ->as(FileSelector::class)
             ->setBucket('posts')
             ->setAcceptTypes('image/*')
             ->isForOne(true)
             ->isRequired(false);
 
 
-        /**
-         * Intro
-         * @var apex\directory\shared\nightfire\_formDelegates\ContentBlock $intro
-         */
-        $intro = $this->loadDelegate('intro', '~admin/nightfire/ContentBlock');
-        $intro
+        // Intro
+        $this->loadDelegate('intro', '~admin/nightfire/ContentBlock')
+            ->as(ContentBlock::class)
             ->setCategory('Description')
             ->isRequired(true);
 
 
-        /**
-         * Body
-         * @var  apex\directory\shared\nightfire\_formDelegates\ContentSlot $body
-         */
-        $body = $this->loadDelegate('body', '~admin/nightfire/ContentSlot');
-        $body
+        // Body
+        $this->loadDelegate('body', '~admin/nightfire/ContentSlot')
+            ->as(ContentSlot::class)
             ->setCategory('Article');
     }
 
-    protected function setDefaultValues()
+    protected function setDefaultValues(): void
     {
         $this->values->isLive = true;
         $this->values->displayIntro = true;

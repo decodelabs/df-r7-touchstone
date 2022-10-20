@@ -6,7 +6,9 @@
 
 namespace DecodeLabs\R7\Nightfire\Category;
 
-class Article extends Base
+use DecodeLabs\R7\Nightfire\CategoryAbstract;
+
+class Article extends CategoryAbstract
 {
     public const DEFAULT_BLOCKS = [
         'SimpleTags', 'RawHtml', 'Markdown',

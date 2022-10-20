@@ -3,12 +3,13 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\_nodes;
 
-use df;
-use df\core;
-use df\apex;
-use df\arch;
+use df\arch\node\form\SelectorDelegate;
+use df\apex\directory\shared\media\_formDelegates\FileSelector;
+use df\apex\directory\shared\nightfire\_formDelegates\ContentBlock;
+use df\apex\directory\shared\nightfire\_formDelegates\ContentSlot;
 
 use DecodeLabs\Exceptional;
 
@@ -48,7 +49,7 @@ class HttpEdit extends HttpAdd
         return $this->_post['id'].':'.$this->_version['id'];
     }
 
-    protected function setDefaultValues()
+    protected function setDefaultValues(): void
     {
         $this->values->importFrom($this->_post, [
             'slug', 'postDate', 'archiveDate', 'isLive', 'allowComments'
@@ -58,11 +59,16 @@ class HttpEdit extends HttpAdd
             'title', 'displayIntro'
         ]);
 
-        $this['category']->setSelected($this->_post['#category']);
-        $this['tags']->setSelected($this->_post['#tags']);
+        $this['category']->as(SelectorDelegate::class)
+            ->setSelected($this->_post['#category']);
+        $this['tags']->as(SelectorDelegate::class)
+            ->setSelected($this->_post['#tags']);
 
-        $this['headerImage']->setSelected($this->_version['#headerImage']);
-        $this['intro']->setBlock($this->_version['intro']);
-        $this['body']->setSlotContent($this->_version['body']);
+        $this['headerImage']->as(FileSelector::class)
+            ->setSelected($this->_version['#headerImage']);
+        $this['intro']->as(ContentBlock::class)
+            ->setBlock($this->_version['intro']);
+        $this['body']->as(ContentSlot::class)
+            ->setSlotContent($this->_version['body']);
     }
 }
