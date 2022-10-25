@@ -10,12 +10,12 @@ use df\apex\directory\shared\media\_formDelegates\FileSelector;
 
 class HttpEdit extends HttpAdd
 {
-    protected function init()
+    protected function init(): void
     {
         $this->_category = $this->scaffold->getRecord();
     }
 
-    protected function getInstanceId()
+    protected function getInstanceId(): ?string
     {
         return $this->_category['id'];
     }

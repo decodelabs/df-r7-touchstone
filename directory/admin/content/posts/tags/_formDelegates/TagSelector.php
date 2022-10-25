@@ -3,6 +3,7 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\tags\_formDelegates;
 
 use df;
@@ -78,7 +79,7 @@ class TagSelector extends arch\node\form\SelectorDelegate
         unset($this->values->slug);
     }
 
-    public function apply()
+    public function apply(): array|string|null
     {
         if ($this->values->slug->hasValue()) {
             $this->onInsertEvent();

@@ -3,22 +3,22 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\tags\_nodes;
 
-use df;
-use df\core;
-use df\apex;
 use df\arch;
 
-class HttpAdd extends arch\node\Form {
-
+class HttpAdd extends arch\node\Form
+{
     protected $_tag;
 
-    protected function init() {
+    protected function init(): void
+    {
         $this->_tag = $this->scaffold->newRecord();
     }
 
-    protected function createUi() {
+    protected function createUi(): void
+    {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Tag details'));
 
@@ -39,7 +39,8 @@ class HttpAdd extends arch\node\Form {
         $fs->addDefaultButtonGroup();
     }
 
-    protected function onSaveEvent() {
+    protected function onSaveEvent()
+    {
         $this->data->newValidator()
 
             // Name
@@ -54,7 +55,7 @@ class HttpAdd extends arch\node\Form {
             ->validate($this->values)
             ->applyTo($this->_tag);
 
-        return $this->complete(function() {
+        return $this->complete(function () {
             $this->_tag->save();
             $this->comms->flashSaveSuccess('tag');
         });

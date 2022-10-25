@@ -14,7 +14,7 @@ class HttpAdd extends arch\node\Form
 {
     protected $_category;
 
-    protected function init()
+    protected function init(): void
     {
         $this->_category = $this->scaffold->newRecord();
     }
@@ -30,7 +30,7 @@ class HttpAdd extends arch\node\Form
             ->isRequired(false);
     }
 
-    protected function createUi()
+    protected function createUi(): void
     {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Category details'));

@@ -15,7 +15,7 @@ use DecodeLabs\Exceptional;
 
 class HttpEdit extends HttpAdd
 {
-    protected function init()
+    protected function init(): void
     {
         $this->_post = $this->scaffold->getRecord();
 
@@ -44,7 +44,7 @@ class HttpEdit extends HttpAdd
         }
     }
 
-    protected function getInstanceId()
+    protected function getInstanceId(): ?string
     {
         return $this->_post['id'].':'.$this->_version['id'];
     }

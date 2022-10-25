@@ -3,11 +3,9 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\_nodes;
 
-use df;
-use df\core;
-use df\apex;
 use df\arch;
 
 use DecodeLabs\Tagged as Html;
@@ -16,7 +14,7 @@ class HttpActivateVersion extends arch\node\ConfirmForm
 {
     protected $_version;
 
-    protected function init()
+    protected function init(): void
     {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
@@ -24,7 +22,7 @@ class HttpActivateVersion extends arch\node\ConfirmForm
         );
     }
 
-    protected function getInstanceId()
+    protected function getInstanceId(): ?string
     {
         return $this->_version['id'];
     }

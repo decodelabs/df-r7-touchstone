@@ -22,7 +22,7 @@ class HttpAdd extends arch\node\Form
     protected $_version;
     protected $_keepVersion = false;
 
-    protected function init()
+    protected function init(): void
     {
         $this->_post = $this->scaffold->newRecord();
         $this->_version = $this->data->newRecord('axis://touchstone/PostVersion');
@@ -74,7 +74,7 @@ class HttpAdd extends arch\node\Form
         $this->values->allowComments = true;
     }
 
-    protected function createUi()
+    protected function createUi(): void
     {
         $form = $this->content->addForm();
         $fs = $form->addFieldSet($this->_('Post details'));

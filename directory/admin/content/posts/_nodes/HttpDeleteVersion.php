@@ -3,11 +3,9 @@
  * This file is part of the Decode Framework
  * @license http://opensource.org/licenses/MIT
  */
+
 namespace df\apex\directory\admin\content\posts\_nodes;
 
-use df;
-use df\core;
-use df\apex;
 use df\arch;
 
 use DecodeLabs\Tagged as Html;
@@ -16,7 +14,7 @@ class HttpDeleteVersion extends arch\node\DeleteForm
 {
     protected $_version;
 
-    protected function init()
+    protected function init(): void
     {
         $this->_version = $this->data->fetchForAction(
             'axis://touchstone/PostVersion',
@@ -24,12 +22,12 @@ class HttpDeleteVersion extends arch\node\DeleteForm
         );
     }
 
-    protected function getInstanceId()
+    protected function getInstanceId(): ?string
     {
         return $this->_version['id'];
     }
 
-    protected function initWithSession()
+    protected function initWithSession(): void
     {
         if ($this->_version['id'] == $this->_version['post']['#activeVersion']) {
             $this->values->addError('active', $this->_(
