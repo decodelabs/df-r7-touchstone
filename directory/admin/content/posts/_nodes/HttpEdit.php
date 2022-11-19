@@ -6,12 +6,12 @@
 
 namespace df\apex\directory\admin\content\posts\_nodes;
 
-use df\arch\node\form\SelectorDelegate;
+use DecodeLabs\Exceptional;
 use df\apex\directory\shared\media\_formDelegates\FileSelector;
 use df\apex\directory\shared\nightfire\_formDelegates\ContentBlock;
 use df\apex\directory\shared\nightfire\_formDelegates\ContentSlot;
 
-use DecodeLabs\Exceptional;
+use df\arch\node\form\SelectorDelegate;
 
 class HttpEdit extends HttpAdd
 {
@@ -46,7 +46,7 @@ class HttpEdit extends HttpAdd
 
     protected function getInstanceId(): ?string
     {
-        return $this->_post['id'].':'.$this->_version['id'];
+        return $this->_post['id'] . ':' . $this->_version['id'];
     }
 
     protected function setDefaultValues(): void

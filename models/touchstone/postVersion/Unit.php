@@ -5,20 +5,18 @@
  */
 namespace df\apex\models\touchstone\postVersion;
 
-use df;
-use df\core;
-use df\apex;
 use df\axis;
 
-class Unit extends axis\unit\Table {
-
-    const ORDERABLE_FIELDS = [
+class Unit extends axis\unit\Table
+{
+    public const ORDERABLE_FIELDS = [
         'title', 'owner', 'post', 'creationDate', 'lastEditDate', 'displayIntro'
     ];
 
-    const DEFAULT_ORDER = 'creationDate DESC';
+    public const DEFAULT_ORDER = 'creationDate DESC';
 
-    protected function createSchema($schema) {
+    protected function createSchema($schema)
+    {
         $schema->addField('id', 'AutoId');
 
         $schema->addField('title', 'Text', 128);

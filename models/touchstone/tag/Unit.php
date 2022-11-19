@@ -5,21 +5,18 @@
  */
 namespace df\apex\models\touchstone\tag;
 
-use df;
-use df\core;
-use df\apex;
-use df\axis;
-use df\opal;
-
 use DecodeLabs\Dictum;
+use df\axis;
+
+use df\opal;
 
 class Unit extends axis\unit\Table
 {
-    const ORDERABLE_FIELDS = [
+    public const ORDERABLE_FIELDS = [
         'slug', 'name'
     ];
 
-    const DEFAULT_ORDER = 'name ASC';
+    public const DEFAULT_ORDER = 'name ASC';
 
     protected function createSchema($schema)
     {
@@ -29,7 +26,7 @@ class Unit extends axis\unit\Table
         $schema->addField('posts', 'ManyToMany', 'post', 'tags');
     }
 
-    public function ensureTagExists($slug, $name=null)
+    public function ensureTagExists($slug, $name = null)
     {
         if ($name === null) {
             $name = Dictum::name($slug);
@@ -49,7 +46,7 @@ class Unit extends axis\unit\Table
     }
 
     // Query blocks
-    public function applyLinkRelationQueryBlock(opal\query\IReadQuery $query, opal\query\IField $relationField, array $extraFields=null)
+    public function applyLinkRelationQueryBlock(opal\query\IReadQuery $query, opal\query\IField $relationField, array $extraFields = null)
     {
         if (!$query instanceof opal\query\IPopulatableQuery) {
             return;

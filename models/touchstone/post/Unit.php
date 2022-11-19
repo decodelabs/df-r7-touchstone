@@ -5,21 +5,18 @@
  */
 namespace df\apex\models\touchstone\post;
 
-use df;
-use df\core;
-use df\apex;
-use df\axis;
-use df\opal;
-
 use DecodeLabs\Disciple;
+use df\axis;
+
+use df\opal;
 
 class Unit extends axis\unit\Table
 {
-    const ORDERABLE_FIELDS = [
+    public const ORDERABLE_FIELDS = [
         'slug', 'owner', 'creationDate', 'postDate', 'lastEditDate', 'archiveDate', 'isLive'
     ];
 
-    const DEFAULT_ORDER = ['postDate DESC', 'creationDate DESC'];
+    public const DEFAULT_ORDER = ['postDate DESC', 'creationDate DESC'];
 
     protected function createSchema($schema)
     {
@@ -51,7 +48,7 @@ class Unit extends axis\unit\Table
     }
 
 
-    public function selectForIndex(string $categorySlug=null, ?string ...$tagSlugs)
+    public function selectForIndex(string $categorySlug = null, ?string ...$tagSlugs)
     {
         if (empty($tagSlugs[0] ?? null)) {
             unset($tagSlugs[0]);
@@ -83,7 +80,7 @@ class Unit extends axis\unit\Table
             })
 
             ->where('isLive', '=', true)
-            ;
+        ;
     }
 
     public function selectForCategoryList(string ...$categories)
@@ -101,7 +98,8 @@ class Unit extends axis\unit\Table
     public function selectForReading(?string $slug)
     {
         return $this->context->data->selectForAction(
-            $this, ['*'],
+            $this,
+            ['*'],
             ['slug' => $slug],
             function ($query) {
                 $query
@@ -116,12 +114,12 @@ class Unit extends axis\unit\Table
                     ->chainIf(!Disciple::isA('admin', 'developer'), function ($query) {
                         $query->where('isLive', '=', true);
                     })
-                    ;
+                ;
             }
         );
     }
 
-    public function getPrevNext($post, string $categorySlug=null, ?string ...$tagSlugs): array
+    public function getPrevNext($post, string $categorySlug = null, ?string ...$tagSlugs): array
     {
         return [
             'prev' => $this->_prevNextQuery('DESC', $post, $categorySlug, ...$tagSlugs)->toRow(),
@@ -129,7 +127,7 @@ class Unit extends axis\unit\Table
         ];
     }
 
-    protected function _prevNextQuery(string $direction, $post, string $categorySlug=null, ?string ...$tagSlugs)
+    protected function _prevNextQuery(string $direction, $post, string $categorySlug = null, ?string ...$tagSlugs)
     {
         return $this->select('id', 'slug')
             ->joinRelation('activeVersion', 'title')
@@ -154,7 +152,7 @@ class Unit extends axis\unit\Table
             ->where('creationDate', $direction == 'ASC' ? '>=' : '<=', $post['creationDate'])
             ->where('isLive', '=', true)
             ->where('id', '!=', $post['id'])
-            ->orderBy('postDate '.$direction, 'creationDate '.$direction);
+            ->orderBy('postDate ' . $direction, 'creationDate ' . $direction);
     }
 
 
@@ -168,7 +166,7 @@ class Unit extends axis\unit\Table
         $query->leftJoinRelation('activeVersion', 'title');
     }
 
-    public function applyActiveVersionQueryBlock(opal\query\IReadQuery $query, $body=false)
+    public function applyActiveVersionQueryBlock(opal\query\IReadQuery $query, $body = false)
     {
         if (!$query instanceof opal\query\IJoinableQuery) {
             return;

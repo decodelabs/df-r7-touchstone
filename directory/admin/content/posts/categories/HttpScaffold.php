@@ -6,13 +6,9 @@
 
 namespace df\apex\directory\admin\content\posts\categories;
 
-use df;
-use df\core;
-use df\apex;
-use df\arch;
-use df\opal;
-
 use DecodeLabs\Metamorph;
+
+use df\arch;
 
 class HttpScaffold extends arch\scaffold\RecordAdmin
 {
@@ -59,9 +55,9 @@ class HttpScaffold extends arch\scaffold\RecordAdmin
     public function generatePostsSectionSubOperativeLinks(): iterable
     {
         yield 'add' => $this->html->link(
-                $this->uri('../add?category='.$this->getRecordId(), true),
-                $this->_('Add post')
-            )
+            $this->uri('../add?category=' . $this->getRecordId(), true),
+            $this->_('Add post')
+        )
             ->setIcon('add');
     }
 

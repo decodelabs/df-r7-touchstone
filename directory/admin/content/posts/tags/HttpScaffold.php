@@ -5,25 +5,21 @@
  */
 namespace df\apex\directory\admin\content\posts\tags;
 
-use df;
-use df\core;
-use df\apex;
 use df\arch;
-use df\opal;
 
 class HttpScaffold extends arch\scaffold\RecordAdmin
 {
-    const TITLE = 'Tags';
-    const ICON = 'tag';
-    const ADAPTER = 'axis://touchstone/Tag';
-    const NAME_FIELD = 'slug';
+    public const TITLE = 'Tags';
+    public const ICON = 'tag';
+    public const ADAPTER = 'axis://touchstone/Tag';
+    public const NAME_FIELD = 'slug';
 
-    const SECTIONS = [
+    public const SECTIONS = [
         'details',
         'posts' => 'post'
     ];
 
-    const LIST_FIELDS = [
+    public const LIST_FIELDS = [
         'slug', 'name', 'posts'
     ];
 

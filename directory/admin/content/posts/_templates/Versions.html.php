@@ -1,4 +1,5 @@
 <?php
+
 use DecodeLabs\Tagged as Html;
 
 echo $this->html->collectionList($versionList)
@@ -32,30 +33,30 @@ echo $this->html->collectionList($versionList)
 
         return [
             $this->html->link(
-                    $this->uri('./activate-version?version='.$version['id'], true),
-                    $this->_('Activate')
-                )
+                $this->uri('./activate-version?version=' . $version['id'], true),
+                $this->_('Activate')
+            )
                 ->setIcon('accept')
                 ->isDisabled($isActive),
 
             $this->html->link(
-                    $this->uri('./edit?post='.$post['id'].'&rebase='.$version['id'], true),
-                    $this->_('Rebase')
-                )
+                $this->uri('./edit?post=' . $post['id'] . '&rebase=' . $version['id'], true),
+                $this->_('Rebase')
+            )
                 ->setIcon('add'),
 
             $this->html->link(
-                    $this->uri('./edit?post='.$post['id'].'&version='.$version['id'], true),
-                    $this->_('Edit')
-                )
+                $this->uri('./edit?post=' . $post['id'] . '&version=' . $version['id'], true),
+                $this->_('Edit')
+            )
                 ->setIcon('edit'),
 
             $this->html->link(
-                    $this->uri('./delete-version?version='.$version['id'], true),
-                    $this->_('Purge')
-                )
+                $this->uri('./delete-version?version=' . $version['id'], true),
+                $this->_('Purge')
+            )
                 ->setIcon('delete')
                 ->isDisabled($isActive)
         ];
     })
-    ;
+;

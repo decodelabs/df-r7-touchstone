@@ -5,11 +5,8 @@
  */
 namespace df\apex\models\touchstone;
 
-use df;
-use df\core;
 use df\axis;
-use df\fire;
 
-class Model extends axis\Model {
-    
+class Model extends axis\Model
+{
 }

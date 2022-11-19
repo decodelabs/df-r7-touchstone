@@ -5,33 +5,29 @@
  */
 namespace df\apex\directory\admin\content\posts;
 
-use df;
-use df\core;
-use df\apex;
-use df\arch;
-use df\opal;
-
 use DecodeLabs\Tagged as Html;
+
+use df\arch;
 
 class HttpScaffold extends arch\scaffold\RecordAdmin
 {
-    const TITLE = 'Posts';
-    const ICON = 'post';
-    const ADAPTER = 'axis://touchstone/Post';
-    const NAME_FIELD = 'title';
+    public const TITLE = 'Posts';
+    public const ICON = 'post';
+    public const ADAPTER = 'axis://touchstone/Post';
+    public const NAME_FIELD = 'title';
 
-    const SECTIONS = [
+    public const SECTIONS = [
         'details',
         'comments' => 'comment',
         'versions' => 'list'
     ];
 
-    const LIST_FIELDS = [
+    public const LIST_FIELDS = [
         'title', 'category', 'tags', 'owner', 'postDate', 'lastEditDate',
         'archiveDate', 'versions', 'isLive'
     ];
 
-    const DETAILS_FIELDS = [
+    public const DETAILS_FIELDS = [
         'title', 'slug', 'owner', 'isLive', 'category', 'tags',
         'versions', 'creationDate', 'postDate', 'lastEditDate', 'archiveDate',
         'headerImage', 'intro', 'body'
